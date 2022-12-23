@@ -15,13 +15,6 @@ Worker::Worker(std::string name, int age, int wage, int number_of_repaired_cars)
             throw IllegalNumberOfRepairedOrSoldCarsException();
         }
 }
-
-int Worker::get_age() const {
-    return age;
-}
-std::string Worker::get_name() const {
-    return name;
-}
 int Worker::get_number_of_repaired_cars() const {
     return number_of_repaired_cars;
 }

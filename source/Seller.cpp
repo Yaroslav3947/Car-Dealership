@@ -23,13 +23,6 @@ int Seller::get_wage_per_day() const {
 int Seller::get_number_of_sold_cars() const {
     return number_of_sold_cars;
 }
-////TODO: workout what's wrong
-int Seller::get_age() const {
-    return age;
-}
-std::string Seller::get_name() const {
-    return name;
-}
 void Seller::printInfo(std::ostream &os) const {
     os << "[Seller: " <<  name << ": " << age << "y.o: $" << wage_per_day << ": " << number_of_sold_cars << " cars sold]";
 }

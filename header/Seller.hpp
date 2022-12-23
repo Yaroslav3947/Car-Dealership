@@ -16,7 +16,5 @@ public:
     int get_wage_per_day() const;
     int get_code_of_seller() const;
     int get_number_of_sold_cars() const;
-    virtual int get_age() const override;
-    virtual std::string get_name() const override;
     virtual void printInfo(std::ostream &os) const override;
 };

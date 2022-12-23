@@ -8,13 +8,6 @@ Client::Client(std::string name, int age)
             throw IllegalAgeException();
         }
 }
-
-int Client::get_age() const {
-    return age;
-}
-std::string Client::get_name() const {
-    return name;
-}
 int Client::get_number_of_cars() const {
     return number_of_cars;
 }
