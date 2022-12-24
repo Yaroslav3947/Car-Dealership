@@ -7,7 +7,6 @@ class I_Printable {
     friend std::istream &operator >>(std::istream &is, I_Printable &obj);
 public:
     virtual void printInfo(std::ostream &os) const = 0;
-    virtual void inputInfo(std::istream &is) = 0;
     
     virtual ~I_Printable() = default;
 };

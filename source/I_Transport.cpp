@@ -7,7 +7,7 @@
 
 I_Transport::I_Transport(std::string brand, std::string model, std::string color, std::string country, int year_of_manufacture, double fuel_comsumption, double price, bool is_new)
     : model{model}, country{country}, brand{brand},color{color}, year_of_manufacture{year_of_manufacture}, fuel_comsumption{fuel_comsumption}, price{price}, is_new{is_new} {
-        if(price < floor_for_price) {
+        if(price < floor_price) {
             throw IllegalPriceException();
         }
 }
@@ -18,25 +18,8 @@ void I_Transport::printInfo(std::ostream &os) const {
     else
         os << "used]";
 }
-void I_Transport::inputInfo(std::istream &is) {
-    std::cout << "Input brand:";
-    is >> brand;
-    std::cout << "Input model:";
-    is >> model;
-    std::cout << "Input color:";
-    is >> color;
-    std::cout << "Input country:\n1 - Germany/2 - Italy";
-    is >> country;
-    std::cout << "Input year of manufacture:";
-    is >> year_of_manufacture;
-    std::cout << "Input fuel comsumption:";
-    is >> fuel_comsumption;
-    std::cout << "Input price:";
-    is >> price;
-    std::cout << "Input if car is new:";
-    is >> is_new;
-    I_Transport(brand, model, color, country, year_of_manufacture, fuel_comsumption, price, is_new);
-}
+// void I_Transport::inputInfo() {
+// }
 bool I_Transport::get_is_new() const {
     return is_new;
 }

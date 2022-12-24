@@ -11,7 +11,6 @@
 #include <IllegalNumberOfRepairedOrSoldCarsException.hpp>
 
 class I_Person : public I_Printable {
-private:
     static constexpr const int default_age = 18;
     static constexpr const char *default_name = "Unnamed Person";
 protected:
@@ -22,8 +21,8 @@ public:
     int get_age() const;
     std::string get_name() const;
     virtual ~I_Person() = default;
-    virtual void inputInfo(std::istream &is) override;
-    virtual void printInfo(std::ostream &os) const override;
+    I_Person() = default;
+    void printInfo(std::ostream &os) const override;
 };
 
 

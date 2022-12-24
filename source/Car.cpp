@@ -85,20 +85,10 @@ void input_is_need_repair(bool &is_need_repair) {
     }
 }
 void set_number_of_doors(const std::string &car_body_styles, int &number_of_doors) {
-    // Car_body_style style;
-    // switch(style) {
-    //     case SEDAN:
-    //     case VAN: 
-    //     case JEEP:
-    //     case HATCHBACK: number_of_doors = 5;break;
-    //     case COUPE: number_of_doors = 3;break;
-    //     default: number_of_doors = 0;break;
-    // }
     if(car_body_styles == "Coupe") 
         number_of_doors = 3;
     else
         number_of_doors = 5;
-    
 }
 
 void input_color(std::string &color) {
@@ -128,20 +118,20 @@ void input_color(std::string &color) {
         default: color = "no color";break;
     }
 }
-void Car::inputInfo(std::istream &is) {
+void Car::inputInfo() {
     std::cout << "Input brand:"; 
-    is >> brand;
+    std::cin >> brand;
     std::cout << "Input model:";
-    is >> model;
+    std::cin >> model;
     std::cout << "Input country:";
-    is >> country;
+    std::cin >> country;
     input_color(color);
     std::cout << "Input year of manufacture:";
-    is >> year_of_manufacture;
+    std::cin >> year_of_manufacture;
     std::cout << "Input fuel comsumption lit. per 100 km:";
-    is >> fuel_comsumption;
+    std::cin >> fuel_comsumption;
     std::cout << "Input price: $";
-    is >> price;
+    std::cin >> price;
     input_car_body_style(car_body_styles);
     set_number_of_doors(car_body_styles, number_of_doors);
     input_type_of_fuel(type_of_fuel);
