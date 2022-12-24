@@ -15,5 +15,6 @@ public:
     Client(std::string name = default_name, int age = default_age);
     virtual ~Client() = default;
     int get_number_of_cars() const;
+    virtual void inputInfo(std::istream &is) override;
     virtual void printInfo(std::ostream &os) const override;
 };

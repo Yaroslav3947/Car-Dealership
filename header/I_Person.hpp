@@ -22,6 +22,7 @@ public:
     int get_age() const;
     std::string get_name() const;
     virtual ~I_Person() = default;
+    virtual void inputInfo(std::istream &is) override;
     virtual void printInfo(std::ostream &os) const override;
 };
 

@@ -12,6 +12,7 @@ protected:
     std::string brand;
     std::string model;
     std::string country;
+    std::string color;
     double fuel_comsumption;
     int year_of_manufacture;
     static constexpr const double default_price = 0.0;
@@ -21,17 +22,20 @@ protected:
     static constexpr const char *default_model = "unknown model";
     static constexpr const char *default_brand = "unknown brand";
     static constexpr const char *default_country = "unknown country";
+    static constexpr const char *default_color = "unknown color";
 public:
-    I_Transport(std::string brand = default_brand, std::string model = default_model, std::string country = default_country,
+    I_Transport(std::string brand = default_brand, std::string model = default_model, std::string color = default_color, std::string country = default_country,
                 int year_of_manufacture = default_year_of_manufacture, double fuel_comsumption = default_fuel_comsumption, 
                 double price = default_price, bool is_new = default_is_new);
     bool get_is_new() const;
     double get_price() const;
     std::string get_brand() const;
+    std::string get_color() const;
     std::string get_model() const;
     std::string get_country() const;
     virtual ~I_Transport() = default;
     int get_year_of_manufacture() const;
     double get_fuel_comsumption() const;
     virtual void printInfo(std::ostream &os) const override;
+    virtual void inputInfo(std::istream &is) override;
 };
