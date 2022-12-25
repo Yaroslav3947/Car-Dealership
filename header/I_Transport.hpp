@@ -3,6 +3,10 @@
 #include <string>
 
 #include <I_Printable.hpp>
+#include <UtilChecking.hpp>
+#include <IllegalPriceException.hpp>
+#include <IllegalFuelComsumptionException.hpp>
+#include <IllegalYearOfManufactureException.hpp>
 
 class I_Transport : public I_Printable {
     const int floor_price = 0;

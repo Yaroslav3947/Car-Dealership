@@ -9,7 +9,12 @@ bool isNormalAge(const int &age) {
     const int acceptedAge = 18;
     return age >= acceptedAge;
 }
-bool isNormalNumberOfRepairedOrSoldCars(const int &num) {
-    const int bound = 0;
+bool isPositiveNumber(const double &num) {
+    const double bound = 0.0;
     return num >= bound;
+}
+bool isNormalYearForCar(const int &num) {
+    const int yearOfFirstCar = 1886;
+    const int ceilOfCarYear = 2023;
+    return yearOfFirstCar <= num &&  num <= ceilOfCarYear;
 }

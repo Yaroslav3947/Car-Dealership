@@ -33,5 +33,6 @@ public:
     std::string get_car_body_styles() const;
     void inputInfo();
     virtual void printInfo(std::ostream &os) const override;
+    void set_number_of_doors(const std::string &car_body_styles, int &number_of_doors);
 };
 

@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <vector>
 
 #include <Car.hpp>
 #include <Login.hpp>
@@ -11,15 +11,31 @@
 
 int main() {
     try {
-
         I_Transport *c1 = new Car();
+        // I_Transport *c2 = new Car();
         c1->inputInfo();
+        // std::vector<I_Transport*> cars{c1};
+        // for(auto x : cars) {
+        //     x->inputInfo();
+        // }
+        // for(const auto x : cars) {
+        //     std::cout << *x << std::endl;
+        // }
         std::cout << *c1 << std::endl;
     }
     catch(const IllegalAgeException& e) {
         std::cerr << e.what() << '\n';
     }
     catch(const IllegalWageException& e) {
+        std::cerr << e.what() << '\n';
+    }
+    catch(const IllegalPriceException& e) {
+        std::cerr << e.what() << '\n';
+    }
+    catch(const IllegalFuelComsumptionException& e) {
+        std::cerr << e.what() << '\n';
+    }
+    catch(const IllegalYearOfManufactureException& e) {
         std::cerr << e.what() << '\n';
     }
     catch(const IllegalNumberOfRepairedOrSoldCarsException& e) {

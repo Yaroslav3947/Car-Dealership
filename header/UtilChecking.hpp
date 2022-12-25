@@ -2,4 +2,5 @@
 
 bool isNormalAge(const int &age);
 bool isNormalWage(const int &wage);
-bool isNormalNumberOfRepairedOrSoldCars(const int &num);
+bool isPositiveNumber(const double &num);
+bool isNormalYearForCar(const int &num);
