@@ -12,15 +12,7 @@
 int main() {
     try {
         I_Transport *c1 = new Car();
-        // I_Transport *c2 = new Car();
         c1->inputInfo();
-        // std::vector<I_Transport*> cars{c1};
-        // for(auto x : cars) {
-        //     x->inputInfo();
-        // }
-        // for(const auto x : cars) {
-        //     std::cout << *x << std::endl;
-        // }
         std::cout << *c1 << std::endl;
     }
     catch(const IllegalAgeException& e) {
@@ -41,12 +33,6 @@ int main() {
     catch(const IllegalNumberOfRepairedOrSoldCarsException& e) {
         std::cerr << e.what() << '\n';
     }
-
-    // I_Transport *c1 = new Car();
-    // // std::cin >> *c1;
-    // I_Person *w1 = new Worker("And", 18,12,1);
-    // std::cout << *c1 << std::endl;
-    // std::cout << w1->get_name();
     
 
 

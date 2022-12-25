@@ -11,6 +11,7 @@ class Car final: public I_Transport {
     static constexpr const int default_number_of_doors = 0;
     static constexpr const bool default_is_need_repair = false;
     static constexpr const char *default_type_of_fuel = "no type of fuel";
+    void write_info_to_file();
 public:
     Car(std::string brand = default_brand,
         std::string model = default_model,

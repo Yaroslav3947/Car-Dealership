@@ -1,5 +1,6 @@
 #include <string>
 #include <vector>
+#include <fstream>
 #include <iostream>
 
 #include <Car.hpp>
@@ -152,6 +153,14 @@ void input_brand(std::string &brand) {
     std::cout << "Input brand:"; 
     std::cin >> brand;
 }
+void ruler() {
+    std::cout << "123456789";
+}
+void Car::write_info_to_file() {
+    std::ofstream out_file;
+    out_file.open("Car.txt", std::fstream::app);
+    out_file << this->model << " ";
+}
 void Car::inputInfo() {
     input_brand(brand);
     input_model(model);
@@ -166,6 +175,7 @@ void Car::inputInfo() {
     input_is_need_repair(is_need_repair);
     set_configuration();
     set_number_of_doors(car_body_styles, number_of_doors);
+    this->write_info_to_file();
 }
 void Car::set_configuration() {
     const double floor_price = 0.0;
