@@ -1,0 +1,6 @@
+AUDI           S5             Electric_Blue            Germany             2021           12.1           65000          1              Coupe          3              vip            0              Diesel         
+BMW            M5             Mint_Green               Germany             2012           15.1           7500           1              Sedan          5              standart       1              Diesel         
+Volkswagen     B7             Blue_Ember               Germany             2017           7.6            14000          1              Sedan          5              standart       0              Gas            
+AUDI           Q8             Purple_Sector            Germany             2020           14.6           150000         1              Jeep           5              vip            0              Gas            
+BMW            M3             Arrow_Gray               Germany             2022           12.1           50000          1              Coupe          0              vip            1              no_fuel
+

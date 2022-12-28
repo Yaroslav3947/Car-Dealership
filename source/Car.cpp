@@ -1,5 +1,6 @@
 #include <string>
 #include <vector>
+#include <iomanip>
 #include <fstream>
 #include <iostream>
 
@@ -10,6 +11,7 @@ Car::Car(std::string brand, std::string model, std::string color, std::string co
     : I_Transport{brand, model, color, country, year_of_manufacture, fuel_comsumption, price, is_new}, car_body_styles{car_body_styles}, number_of_doors{number_of_doors}, is_need_repair{is_need_repair}, type_of_fuel{type_of_fuel} {
         set_number_of_doors(car_body_styles, number_of_doors);
         set_configuration();
+        // this->write_info_to_file();
 }
 
 void Car::printInfo(std::ostream &os) const {
@@ -20,10 +22,45 @@ void Car::printInfo(std::ostream &os) const {
         os << "used: ";
     os << car_body_styles << ": " << number_of_doors << " doors: " << configuration << ": ";
     if (is_need_repair)
-        os << "need repair: ";
+        os << "need_repair: ";
     else
-        os << "doesn't need repair: ";
+        os << "doesn't_need_repair: ";
     os << type_of_fuel << "]";
+}
+void Car::print_headline_in_file() {
+    std::ofstream out_file;
+    out_file.open(path_to_car_file, std::fstream::app);
+    if(!out_file.is_open()) {
+        throw FileOpenIssue();
+    }
+    out_file << std::setw(field_size1) << std::left << "Brand" << std::setw(field_size1) << std::left << "Model" << std::setw(field_size3) << std::left << "Color" << std::setw(field_size2) << std::left << "Country" << std::setw(field_size1) << std::left << "Year" << std::setw(field_size1)  << std::left << "Fuel_comps." << std::setw(field_size1) << std::left << "Price" << std::setw(field_size1) << std::left
+                << "Is_new" << std::setw(field_size1) << std::left << "Style" << std::setw(field_size1)  << std::left << "Doors" << std::setw(field_size1) << std::left << "Config." << std::setw(field_size1) << std::left << "Need_Repair" << std::setw(field_size1) << std::left << "Fuel" << std::endl;
+    out_file.close();
+}
+void Car::write_info_to_file() {
+    std::ofstream out_file;
+    out_file.open(path_to_car_file, std::fstream::app);
+    if(!out_file.is_open()) {
+        throw FileOpenIssue();
+    }
+    out_file << std::setw(field_size1) << std::left <<  this->brand << std::setw(field_size1) << std::left <<  this->model <<  std::setw(field_size3) << std::left << this->color << std::setw(field_size2) << std::left << this->country
+             << std::setw(field_size1) <<std::left << this->year_of_manufacture << std::setw(field_size1) << std::left << this->fuel_comsumption
+             << std::setw(field_size1) << std::left << this->price << std::setw(field_size1) << std::left << this->is_new << std::setw(field_size1) << std::left << this->car_body_styles
+             << std::setw(field_size1) << std::left << this->number_of_doors << std::setw(field_size1) << std::left << this->configuration << std::setw(field_size1)  << std::left << this->is_need_repair
+             << std::setw(field_size1) << std::left << this->type_of_fuel << std::endl;
+    out_file.close();
+}
+void Car::print_all_info_from_file() const {
+    std::ifstream in_file{path_to_car_file};
+    if(!in_file) {
+        throw FileOpenIssue();
+    }
+    std::string line{};
+    while (!in_file.eof()) {
+        std::getline(in_file, line);
+        std::cout << line << std::endl;
+    }
+    in_file.close();
 }
 void print_preferences_of(const std::vector <std::string> &vec) {
     for(size_t i{0};i<vec.size();i++) {
@@ -63,7 +100,7 @@ void input_type_of_fuel(std::string &type_of_fuel) {
     switch(choice) {
         case Gas: type_of_fuel = "Gas";break;
         case Diesel: type_of_fuel = "Diesel";break;
-        default: type_of_fuel = "no type of fuel";break;
+        default: type_of_fuel = "no_fuel";break;
     }
 }
 enum Is_need_repair {
@@ -153,14 +190,6 @@ void input_brand(std::string &brand) {
     std::cout << "Input brand:"; 
     std::cin >> brand;
 }
-void ruler() {
-    std::cout << "123456789";
-}
-void Car::write_info_to_file() {
-    std::ofstream out_file;
-    out_file.open("Car.txt", std::fstream::app);
-    out_file << this->model << " ";
-}
 void Car::inputInfo() {
     input_brand(brand);
     input_model(model);
@@ -191,7 +220,7 @@ void Car::set_configuration() {
         configuration = "vip";
     }
     else {
-        configuration = "no configuration";
+        configuration = "no config";
     }
 }
 int Car::get_number_of_doors() const {

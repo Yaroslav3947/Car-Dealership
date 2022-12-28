@@ -4,6 +4,8 @@
 
 #include <I_Printable.hpp>
 #include <UtilChecking.hpp>
+#include <FileOpenIssue.hpp>
+
 #include <IllegalPriceException.hpp>
 #include <IllegalFuelComsumptionException.hpp>
 #include <IllegalYearOfManufactureException.hpp>
@@ -38,13 +40,15 @@ public:
             bool is_new = default_is_new);
     bool get_is_new() const;
     double get_price() const;
+    virtual void inputInfo() = 0;
     std::string get_brand() const;
     std::string get_color() const;
     std::string get_model() const;
     std::string get_country() const;
+    virtual ~I_Transport() = default;
     double get_fuel_comsumption() const;
     int get_year_of_manufacture() const;
-    virtual ~I_Transport() = default;
-    virtual void inputInfo() = 0;
+    virtual void write_info_to_file() = 0;
     void printInfo(std::ostream &os) const override;
+    virtual void print_all_info_from_file() const = 0;
 };
