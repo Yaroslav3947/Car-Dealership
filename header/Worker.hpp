@@ -2,13 +2,12 @@
 
 class Worker: public I_Person {
     int wage;
-    static int code_of_worker;
     int number_of_repaired_cars = default_number_of_repaired_cars;
     static constexpr const int default_age = 18;
     static constexpr const int default_wage = 70;
     static constexpr const char *default_name = "Unnamed Worker";
     static constexpr const int default_number_of_repaired_cars = 0;
-    // I_Transport *transport = new Car();
+    Car *car;
 public:
     Worker(std::string name = default_name,
         int age = default_age,

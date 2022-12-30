@@ -1,8 +1,8 @@
 #pragma once
 
+#include <list>
 #include <string>
 
-// #include <Util.hpp>
 #include <I_Printable.hpp>
 #include <FileOpenIssue.hpp>
 
@@ -40,7 +40,7 @@ public:
             bool is_new = default_is_new);
     bool get_is_new() const;
     double get_price() const;
-    virtual void inputInfo() = 0;
+    virtual void inputInfo(std::list <I_Transport *> &list) = 0;
     std::string get_brand() const;
     std::string get_color() const;
     std::string get_model() const;

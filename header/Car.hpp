@@ -32,14 +32,13 @@ public:
         bool is_need_repair = default_is_need_repair,
         std::string type_of_fuel = default_type_of_fuel);
     ~Car() = default;
-    void inputInfo();
     void set_configuration();
     bool get_is_need_repair() const;
     int get_number_of_doors() const;
-    void print_headline_in_file() ;
     std::string get_type_of_fuel() const;
     std::string get_configuration() const;
     std::string get_car_body_styles() const;
+    void inputInfo(std::list <I_Transport *> &list); 
     void print_all_info_from_file() const override;
     virtual void printInfo(std::ostream &os) const override;
     void set_number_of_doors(const std::string &car_body_styles, int &number_of_doors);

@@ -11,7 +11,6 @@ Car::Car(std::string brand, std::string model, std::string color, std::string co
     : I_Transport{brand, model, color, country, year_of_manufacture, fuel_comsumption, price, is_new}, car_body_styles{car_body_styles}, number_of_doors{number_of_doors}, is_need_repair{is_need_repair}, type_of_fuel{type_of_fuel} {
         set_number_of_doors(car_body_styles, number_of_doors);
         set_configuration();
-        // this->write_info_to_file();
 }
 
 void Car::printInfo(std::ostream &os) const {
@@ -27,16 +26,7 @@ void Car::printInfo(std::ostream &os) const {
         os << "doesn't_need_repair: ";
     os << type_of_fuel << "]";
 }
-void Car::print_headline_in_file() {
-    std::ofstream out_file;
-    out_file.open(path_to_car_file, std::fstream::app);
-    if(!out_file.is_open()) {
-        throw FileOpenIssue();
-    }
-    out_file << std::setw(field_size1) << std::left << "Brand" << std::setw(field_size1) << std::left << "Model" << std::setw(field_size3) << std::left << "Color" << std::setw(field_size2) << std::left << "Country" << std::setw(field_size1) << std::left << "Year" << std::setw(field_size1)  << std::left << "Fuel_comps." << std::setw(field_size1) << std::left << "Price" << std::setw(field_size1) << std::left
-                << "Is_new" << std::setw(field_size1) << std::left << "Style" << std::setw(field_size1)  << std::left << "Doors" << std::setw(field_size1) << std::left << "Config." << std::setw(field_size1) << std::left << "Need_Repair" << std::setw(field_size1) << std::left << "Fuel" << std::endl;
-    out_file.close();
-}
+
 void Car::write_info_to_file() {
     std::ofstream out_file;
     out_file.open(path_to_car_file, std::fstream::app);
@@ -190,7 +180,7 @@ void input_brand(std::string &brand) {
     std::cout << "Input brand:"; 
     std::cin >> brand;
 }
-void Car::inputInfo() {
+void Car::inputInfo(std::list <I_Transport *> &list) {
     input_brand(brand);
     input_model(model);
     input_country(country);
@@ -205,6 +195,7 @@ void Car::inputInfo() {
     set_configuration();
     set_number_of_doors(car_body_styles, number_of_doors);
     this->write_info_to_file();
+    list.push_back(this);
 }
 void Car::set_configuration() {
     const double floor_price = 0.0;
@@ -220,7 +211,7 @@ void Car::set_configuration() {
         configuration = "vip";
     }
     else {
-        configuration = "no config";
+        configuration = "no_config";
     }
 }
 int Car::get_number_of_doors() const {
