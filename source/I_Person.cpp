@@ -19,3 +19,6 @@ std::string I_Person::get_name() const {
 void I_Person::printInfo(std::ostream &os) const {
     os << "[Person: " <<  name << ": " << age << "y.o]";
 }
+void I_Person::set_id(const size_t &id) {
+    this->id = id;
+}

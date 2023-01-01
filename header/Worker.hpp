@@ -1,3 +1,5 @@
+#pragma once
+
 #include <I_Person.hpp>
 
 class Worker: public I_Person {
@@ -7,7 +9,6 @@ class Worker: public I_Person {
     static constexpr const int default_wage = 70;
     static constexpr const char *default_name = "Unnamed Worker";
     static constexpr const int default_number_of_repaired_cars = 0;
-    Car *car;
 public:
     Worker(std::string name = default_name,
         int age = default_age,

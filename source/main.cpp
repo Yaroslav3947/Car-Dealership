@@ -1,4 +1,6 @@
 #include <list>
+#include <ctime>
+#include <memory>
 #include <vector>
 #include <fstream>
 #include <iostream>
@@ -13,48 +15,39 @@
 #include <I_Transport.hpp>
 #include <UtilChecking.hpp>
 
-std::list<I_Transport *> get_list_of_cars() {
-    const std::string path_to_car_file{"Car.txt"};
-    bool is_new, is_need_repair;
-    double fuel_comsumption, price;
-    int number_of_doors, year_of_manufacture;
-    std::list<I_Transport *> list;
-    std::string brand, model, color, country, car_body_styles, configuration, type_of_fuel;
-    std::ifstream in_file;
-    in_file.open(path_to_car_file);
-    if (!in_file) {
-        throw FileOpenIssue();
-    }
-    while (in_file >> brand >> model >> color >> country >> year_of_manufacture 
-            >> fuel_comsumption >> price >> is_new >> car_body_styles >> number_of_doors
-            >> configuration >> is_need_repair >> type_of_fuel) {
-        list.emplace_back(
-            (new Car{brand, model, color, country, year_of_manufacture, fuel_comsumption,
-                     price, is_new, car_body_styles, number_of_doors, is_need_repair, type_of_fuel}));
-    }
-    in_file.close();
-    return list;
-}
+
 
 void mainProblem() {
-    std::list <I_Transport *> cars = get_list_of_cars();
+    std::list <I_Transport::PtrT> cars = get_list_of_cars();
+    
 
+    // Client *client1 = new Client("Anderew", 20);
+    // std::shared_ptr<I_Person> client1 = std::make_shared<Client>("Andrew", 20);
+    // generate_id(client1);
+    
+    // std::shared_ptr<I_Person> client2 = std::make_shared<Client>("Max", 21);
 
-    Client *client1 = new Client("Anderew", 20);
-    I_Transport *car1 = new Car();
+    // std::cout << *client1 << std::endl;
+    // std::cout << *client2 << std::endl;
+
+    
+    I_Transport::PtrT car1 = std::make_shared<Car>();
     car1->inputInfo(cars);
-    client1->add_car(car1);
-    std::cout << client1->get_number_of_cars() << std::endl;
-    std::vector<I_Transport*> vec = client1->get_cars();
-    for(const auto x: vec) {
-        std::cout << *x << std::endl;
-    }
+    // generate_id(ids);
+    std::cout << *car1 << std::endl;
+    // // car1->inputInfo(cars);
+    // client1->add_car(car1);
+    // std::cout << client1->get_number_of_cars() << std::endl;
+    // std::vector<I_Transport::PtrT> vec = client1->get_cars();
+    // for(const auto x: vec) {
+    //     std::cout << *x << std::endl;
+    // }
     
 
 
     
-    // cars.sort([](I_Transport *a, I_Transport *b){ return a->get_price() < b->get_price();});
-    // display(cars);
+    // cars.sort([]( I_Transport::PtrT a,  I_Transport::PtrT b){ return a->get_brand() < b->get_brand();});
+    display(cars);
 }
 int main() {
     

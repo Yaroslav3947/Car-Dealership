@@ -1,3 +1,4 @@
+#include <memory>
 #include <string>
 #include <vector>
 #include <iomanip>
@@ -7,14 +8,14 @@
 #include <Car.hpp>
 
 
-Car::Car(std::string brand, std::string model, std::string color, std::string country, int year_of_manufacture, double fuel_comsumption, double price, bool is_new, std::string car_body_styles, int number_of_doors, bool is_need_repair, std::string type_of_fuel)
-    : I_Transport{brand, model, color, country, year_of_manufacture, fuel_comsumption, price, is_new}, car_body_styles{car_body_styles}, number_of_doors{number_of_doors}, is_need_repair{is_need_repair}, type_of_fuel{type_of_fuel} {
+Car::Car(int id, std::string brand, std::string model, std::string color, std::string country, int year_of_manufacture, double fuel_comsumption, double price, bool is_new, std::string car_body_styles, int number_of_doors, bool is_need_repair, std::string type_of_fuel)
+    : I_Transport{id, brand, model, color, country, year_of_manufacture, fuel_comsumption, price, is_new}, car_body_styles{car_body_styles}, number_of_doors{number_of_doors}, is_need_repair{is_need_repair}, type_of_fuel{type_of_fuel} {
         set_number_of_doors(car_body_styles, number_of_doors);
         set_configuration();
 }
 
 void Car::printInfo(std::ostream &os) const {
-    os << "[Car: " << brand << ": " << model << ": " << color << ": " << country << ": " << year_of_manufacture << " year: " << fuel_comsumption << "lit/100km: $" << price << ": ";
+    os << "[Car: id: " << id  << ": "<< brand << ": " << model << ": " << color << ": " << country << ": " << year_of_manufacture << " year: " << fuel_comsumption << "lit/100km: $" << price << ": ";
     if (is_new)
         os << "new: ";
     else
@@ -28,12 +29,15 @@ void Car::printInfo(std::ostream &os) const {
 }
 
 void Car::write_info_to_file() {
+    const int field_size1 = 15;
+    const int field_size2 = 20;
+    const int field_size3 = 25;
     std::ofstream out_file;
     out_file.open(path_to_car_file, std::fstream::app);
     if(!out_file.is_open()) {
         throw FileOpenIssue();
     }
-    out_file << std::setw(field_size1) << std::left <<  this->brand << std::setw(field_size1) << std::left <<  this->model <<  std::setw(field_size3) << std::left << this->color << std::setw(field_size2) << std::left << this->country
+    out_file << std::setw(field_size1) << std::left << this->id << std::setw(field_size1) << std::left <<  this->brand << std::setw(field_size1) << std::left <<  this->model <<  std::setw(field_size3) << std::left << this->color << std::setw(field_size2) << std::left << this->country
              << std::setw(field_size1) <<std::left << this->year_of_manufacture << std::setw(field_size1) << std::left << this->fuel_comsumption
              << std::setw(field_size1) << std::left << this->price << std::setw(field_size1) << std::left << this->is_new << std::setw(field_size1) << std::left << this->car_body_styles
              << std::setw(field_size1) << std::left << this->number_of_doors << std::setw(field_size1) << std::left << this->configuration << std::setw(field_size1)  << std::left << this->is_need_repair
@@ -180,7 +184,7 @@ void input_brand(std::string &brand) {
     std::cout << "Input brand:"; 
     std::cin >> brand;
 }
-void Car::inputInfo(std::list <I_Transport *> &list) {
+void Car::inputInfo(std::list <PtrT> &cars) {
     input_brand(brand);
     input_model(model);
     input_country(country);
@@ -194,8 +198,10 @@ void Car::inputInfo(std::list <I_Transport *> &list) {
     input_is_need_repair(is_need_repair);
     set_configuration();
     set_number_of_doors(car_body_styles, number_of_doors);
+    std::vector<int> ids = get_ids_from_cars(cars);
+    this->id = generate_id(ids);
     this->write_info_to_file();
-    list.push_back(this);
+    cars.push_back(shared_from_this());
 }
 void Car::set_configuration() {
     const double floor_price = 0.0;
@@ -213,6 +219,9 @@ void Car::set_configuration() {
     else {
         configuration = "no_config";
     }
+}
+void Car::set_id(const size_t &id) {
+    I_Transport::set_id(id);
 }
 int Car::get_number_of_doors() const {
     return number_of_doors;

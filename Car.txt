@@ -1,9 +1,3 @@
-AUDI           S5             Electric_Blue            Germany             2021           12.1           65000          1              Coupe          3              vip            0              Diesel         
-BMW            M5             Mint_Green               Germany             2012           16.1           7500           1              Sedan          5              standart       1              Diesel         
-Volkswagen     B7             Blue_Ember               Germany             2017           7.6            14000          1              Sedan          5              standart       0              Gas            
-AUDI           Q8             Purple_Sector            Germany             2020           14.6           150000         1              Jeep           5              vip            0              Gas            
-BMW            M3             Arrow_Gray               Germany             2022           12.1           50000          1              Coupe          0              vip            1              no_fuel
-Renault        Megane         Electric_Blue            France              2011           5.5            9800           1              Sedan          5              standart       0              Diesel         
-BMW            340I           Stryker_Red              Germany             2015           9.9            16700          1              Sedan          5              standart       1              Diesel         
-Toyota         Land_cruiser   Bianco_Courmayeur        Japan               2010           25.5           40000          1              Jeep           5              vip            0              Gas            
-Subaru         Forester       Electric_Blue            Japan               2014           14.4           15000          1              Jeep           5              standart       0              Gas            
+0              AUID           3              Arrow_Gray               3                   2022           21             2              1              Coupe          3              econom         0              Diesel         
+1              sdf            3              Arrow_Gray               3                   2022           2              2              1              Coupe          3              econom         0              Diesel         
+2              we             e              Arrow_Gray               e                   2022           2              2              1              Coupe          3              econom         0              Diesel         

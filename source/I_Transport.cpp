@@ -5,21 +5,15 @@
 #include <IllegalPriceException.hpp>
 
 
-I_Transport::I_Transport(std::string brand, std::string model, std::string color, std::string country, int year_of_manufacture, double fuel_comsumption, double price, bool is_new)
-    : model{model}, country{country}, brand{brand},color{color}, year_of_manufacture{year_of_manufacture}, fuel_comsumption{fuel_comsumption}, price{price}, is_new{is_new} {
+I_Transport::I_Transport(int id, std::string brand, std::string model, std::string color, std::string country, int year_of_manufacture, double fuel_comsumption, double price, bool is_new)
+    : id{id}, model{model}, country{country}, brand{brand},color{color}, year_of_manufacture{year_of_manufacture}, fuel_comsumption{fuel_comsumption}, price{price}, is_new{is_new} {
         if(price < floor_price) {
             throw IllegalPriceException();
         }
 }
-void I_Transport::printInfo(std::ostream &os) const {
-    os << "[Transport: " << brand << ": " << model << ": " << color << ": " << country << ": " << year_of_manufacture << " year: " << fuel_comsumption << "lit/100km: $" << price << ": ";
-    if (is_new)
-        os << "new]";
-    else
-        os << "used]";
+void I_Transport::set_id(const size_t &id) {
+    this->id = id;
 }
-// void I_Transport::inputInfo() {
-// }
 bool I_Transport::get_is_new() const {
     return is_new;
 }
@@ -43,4 +37,7 @@ int I_Transport::get_year_of_manufacture() const {
 }
 double I_Transport::get_fuel_comsumption() const {
     return fuel_comsumption;
+}
+int I_Transport::get_id() const {
+    return id;
 }

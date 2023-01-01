@@ -1,25 +1,22 @@
+#pragma once
 #include <fstream>
 
 #include <I_Transport.hpp>
 #include <UtilChecking.hpp>
-class Car final: public I_Transport {
-    // static size_t code_of_car;
+class Car : public I_Transport, public std::enable_shared_from_this<Car> {
     bool is_need_repair;
     int number_of_doors;
     std::string type_of_fuel;
     std::string configuration;
     std::string car_body_styles;
     void write_info_to_file() override;
-    const int field_size1 = 15;
-    const int field_size2 = 20;
-    const int field_size3 = 25;
     const std::string path_to_car_file = "Car.txt";
     static constexpr const char *default_car_body_styles = "no style";
     static constexpr const int default_number_of_doors = 0;
     static constexpr const bool default_is_need_repair = false;
     static constexpr const char *default_type_of_fuel = "no fuel";
 public:
-    Car(std::string brand = default_brand,
+    Car(int id = default_id, std::string brand = default_brand,
         std::string model = default_model,
         std::string color = default_color,
         std::string country = default_country,
@@ -37,10 +34,11 @@ public:
     int get_number_of_doors() const;
     std::string get_type_of_fuel() const;
     std::string get_configuration() const;
+    void set_id(const size_t &id) override;
     std::string get_car_body_styles() const;
-    void inputInfo(std::list <I_Transport *> &list); 
     void print_all_info_from_file() const override;
     virtual void printInfo(std::ostream &os) const override;
+    void inputInfo(std::list <PtrT> &list) override; 
     void set_number_of_doors(const std::string &car_body_styles, int &number_of_doors);
 };
 

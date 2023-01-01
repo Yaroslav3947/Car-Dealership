@@ -1,6 +1,8 @@
 #pragma once
 
 #include <list>
+#include <vector>
+#include <memory>
 #include <string>
 
 #include <I_Printable.hpp>
@@ -13,6 +15,7 @@
 class I_Transport : public I_Printable {
     const int floor_price = 0;
 protected:
+    int id;
     bool is_new;
     double price;
     std::string brand;
@@ -21,6 +24,7 @@ protected:
     std::string color;
     double fuel_comsumption;
     int year_of_manufacture;
+    static constexpr const int default_id = -1;  
     static constexpr const double default_price = 0.0;
     static constexpr const bool default_is_new = true;
     static constexpr const int default_year_of_manufacture = 0;
@@ -30,7 +34,7 @@ protected:
     static constexpr const char *default_country = "unknown country";
     static constexpr const char *default_color = "unknown color";
 public:
-    I_Transport(std::string brand = default_brand,
+    I_Transport(int id = default_id, std::string brand = default_brand,
             std::string model = default_model,
             std::string color = default_color,
             std::string country = default_country,
@@ -38,9 +42,9 @@ public:
             double fuel_comsumption = default_fuel_comsumption, 
             double price = default_price,
             bool is_new = default_is_new);
+    int get_id() const;
     bool get_is_new() const;
     double get_price() const;
-    virtual void inputInfo(std::list <I_Transport *> &list) = 0;
     std::string get_brand() const;
     std::string get_color() const;
     std::string get_model() const;
@@ -49,6 +53,9 @@ public:
     double get_fuel_comsumption() const;
     int get_year_of_manufacture() const;
     virtual void write_info_to_file() = 0;
-    void printInfo(std::ostream &os) const override;
+    using PtrT = std::shared_ptr<I_Transport>;
+    virtual void set_id(const size_t &id) = 0;
+    void printInfo(std::ostream &os) const override = 0;
     virtual void print_all_info_from_file() const = 0;
+    virtual void inputInfo(std::list <PtrT> &list) = 0;
 };

@@ -1,3 +1,5 @@
+#pragma once
+
 #include <I_Person.hpp>
 
 class Seller: public I_Person {
