@@ -8,6 +8,7 @@
 #include <I_Printable.hpp>
 #include <FileOpenIssue.hpp>
 
+#include <NoFreeIdException.hpp>
 #include <IllegalPriceException.hpp>
 #include <IllegalFuelComsumptionException.hpp>
 #include <IllegalYearOfManufactureException.hpp>
@@ -22,13 +23,13 @@ protected:
     std::string model;
     std::string country;
     std::string color;
-    double fuel_comsumption;
+    double fuel_consumption;
     int year_of_manufacture;
     static constexpr const int default_id = -1;  
     static constexpr const double default_price = 0.0;
     static constexpr const bool default_is_new = true;
     static constexpr const int default_year_of_manufacture = 0;
-    static constexpr const double default_fuel_comsumption = 0.0;
+    static constexpr const double default_fuel_consumption = 0.0;
     static constexpr const char *default_model = "unknown model";
     static constexpr const char *default_brand = "unknown brand";
     static constexpr const char *default_country = "unknown country";
@@ -39,7 +40,7 @@ public:
             std::string color = default_color,
             std::string country = default_country,
             int year_of_manufacture = default_year_of_manufacture,
-            double fuel_comsumption = default_fuel_comsumption, 
+            double fuel_consumption = default_fuel_consumption, 
             double price = default_price,
             bool is_new = default_is_new);
     int get_id() const;
@@ -50,7 +51,7 @@ public:
     std::string get_model() const;
     std::string get_country() const;
     virtual ~I_Transport() = default;
-    double get_fuel_comsumption() const;
+    double get_fuel_consumption() const;
     int get_year_of_manufacture() const;
     virtual void write_info_to_file() = 0;
     using PtrT = std::shared_ptr<I_Transport>;

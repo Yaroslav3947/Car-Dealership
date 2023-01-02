@@ -11,7 +11,7 @@ int Client::get_number_of_cars() const {
 void Client::printInfo(std::ostream &os) const {
     os << "[Client: id :" <<  id << ": " << name << ": " << age << "y.o: "  << number_of_cars << " cars]";
 }
-std::vector<I_Transport::PtrT> Client::get_cars() {
+std::list<I_Transport::PtrT> Client::get_cars() {
     return cars;
 }
 void Client::add_car(I_Transport::PtrT car) {

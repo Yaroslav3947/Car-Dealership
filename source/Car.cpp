@@ -8,14 +8,14 @@
 #include <Car.hpp>
 
 
-Car::Car(int id, std::string brand, std::string model, std::string color, std::string country, int year_of_manufacture, double fuel_comsumption, double price, bool is_new, std::string car_body_styles, int number_of_doors, bool is_need_repair, std::string type_of_fuel)
-    : I_Transport{id, brand, model, color, country, year_of_manufacture, fuel_comsumption, price, is_new}, car_body_styles{car_body_styles}, number_of_doors{number_of_doors}, is_need_repair{is_need_repair}, type_of_fuel{type_of_fuel} {
+Car::Car(int id, std::string brand, std::string model, std::string color, std::string country, int year_of_manufacture, double fuel_consumption, double price, bool is_new, std::string car_body_styles, int number_of_doors, bool is_need_repair, std::string type_of_fuel)
+    : I_Transport{id, brand, model, color, country, year_of_manufacture, fuel_consumption, price, is_new}, car_body_styles{car_body_styles}, number_of_doors{number_of_doors}, is_need_repair{is_need_repair}, type_of_fuel{type_of_fuel} {
         set_number_of_doors(car_body_styles, number_of_doors);
         set_configuration();
 }
 
 void Car::printInfo(std::ostream &os) const {
-    os << "[Car: id: " << id  << ": "<< brand << ": " << model << ": " << color << ": " << country << ": " << year_of_manufacture << " year: " << fuel_comsumption << "lit/100km: $" << price << ": ";
+    os << "[Car: id: " << id  << ": "<< brand << ": " << model << ": " << color << ": " << country << ": " << year_of_manufacture << " year: " << fuel_consumption << "lit/100km: $" << price << ": ";
     if (is_new)
         os << "new: ";
     else
@@ -38,7 +38,7 @@ void Car::write_info_to_file() {
         throw FileOpenIssue();
     }
     out_file << std::setw(field_size1) << std::left << this->id << std::setw(field_size1) << std::left <<  this->brand << std::setw(field_size1) << std::left <<  this->model <<  std::setw(field_size3) << std::left << this->color << std::setw(field_size2) << std::left << this->country
-             << std::setw(field_size1) <<std::left << this->year_of_manufacture << std::setw(field_size1) << std::left << this->fuel_comsumption
+             << std::setw(field_size1) <<std::left << this->year_of_manufacture << std::setw(field_size1) << std::left << this->fuel_consumption
              << std::setw(field_size1) << std::left << this->price << std::setw(field_size1) << std::left << this->is_new << std::setw(field_size1) << std::left << this->car_body_styles
              << std::setw(field_size1) << std::left << this->number_of_doors << std::setw(field_size1) << std::left << this->configuration << std::setw(field_size1)  << std::left << this->is_need_repair
              << std::setw(field_size1) << std::left << this->type_of_fuel << std::endl;
@@ -158,10 +158,10 @@ void input_price(double &price) {
         throw IllegalPriceException();
     }
 }
-void input_fuel_comsumption(double &fuel_comsumption) {
+void input_fuel_consumption(double &fuel_consumption) {
     std::cout << "Input fuel comsumption lit. per 100 km:";
-    std::cin >> fuel_comsumption;
-    if(!isPositiveNumber(fuel_comsumption)) {
+    std::cin >> fuel_consumption;
+    if(!isPositiveNumber(fuel_consumption)) {
         throw IllegalFuelComsumptionException();
     }
 }
@@ -190,7 +190,7 @@ void Car::inputInfo(std::list <PtrT> &cars) {
     input_country(country);
     input_color(color);
     input_year_of_manufacture(year_of_manufacture);
-    input_fuel_comsumption(fuel_comsumption);
+    input_fuel_consumption(fuel_consumption);
     input_price(price);
     input_car_body_style(car_body_styles);
     set_number_of_doors(car_body_styles, number_of_doors);

@@ -29,7 +29,7 @@ public:
     virtual int get_number_of_cars() const = 0;
     void printInfo(std::ostream &os) const override;
     virtual void add_car(I_Transport::PtrT car) = 0;
-    virtual std::vector<I_Transport::PtrT> get_cars() = 0;
+    virtual std::list<I_Transport::PtrT> get_cars() = 0;
 };
 
 

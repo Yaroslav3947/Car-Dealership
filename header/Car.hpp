@@ -21,7 +21,7 @@ public:
         std::string color = default_color,
         std::string country = default_country,
         int year_of_manufacture = default_year_of_manufacture,
-        double fuel_comsumption = default_fuel_comsumption, 
+        double fuel_consumption = default_fuel_consumption, 
         double price = default_price,
         bool is_new = default_is_new,
         std::string car_body_styles = default_car_body_styles,
