@@ -37,10 +37,12 @@ void Car::write_info_to_file() {
     if(!out_file.is_open()) {
         throw FileOpenIssue();
     }
-    out_file << std::setw(field_size1) << std::left << this->id << std::setw(field_size1) << std::left <<  this->brand << std::setw(field_size1) << std::left <<  this->model <<  std::setw(field_size3) << std::left << this->color << std::setw(field_size2) << std::left << this->country
+    out_file << std::setw(field_size1) << std::left << this->id << std::setw(field_size1) << std::left <<  this->brand << std::setw(field_size1) 
+             << std::left <<  this->model <<  std::setw(field_size3) << std::left << this->color << std::setw(field_size2) << std::left << this->country
              << std::setw(field_size1) <<std::left << this->year_of_manufacture << std::setw(field_size1) << std::left << this->fuel_consumption
-             << std::setw(field_size1) << std::left << this->price << std::setw(field_size1) << std::left << this->is_new << std::setw(field_size1) << std::left << this->car_body_styles
-             << std::setw(field_size1) << std::left << this->number_of_doors << std::setw(field_size1) << std::left << this->configuration << std::setw(field_size1)  << std::left << this->is_need_repair
+             << std::setw(field_size1) << std::left << this->price << std::setw(field_size1) << std::left << this->is_new << std::setw(field_size1) 
+             << std::left << this->car_body_styles << std::setw(field_size1) << std::left << this->number_of_doors << std::setw(field_size1) 
+             << std::left << this->configuration << std::setw(field_size1)  << std::left << this->is_need_repair
              << std::setw(field_size1) << std::left << this->type_of_fuel << std::endl;
     out_file.close();
 }

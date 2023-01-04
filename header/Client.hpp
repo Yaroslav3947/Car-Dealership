@@ -21,5 +21,5 @@ public:
     ~Client() = default;
     std::list<I_Transport::PtrT> get_cars();
     void add_car(I_Transport::PtrT car);
-    virtual void printInfo(std::ostream &os) const override;
+    void printInfo(std::ostream &os) const override;
 };

@@ -63,7 +63,6 @@ std::list<I_Transport::PtrT> get_list_of_cars() {
 std::vector<int> get_ids_from_cars(std::list<I_Transport::PtrT> &cars) {
     std::vector <int> ids;
     for(auto x: cars) {
-        std::cout << x->get_id() << std::endl;
         ids.push_back(x->get_id());
     }
     return ids;
@@ -84,4 +83,5 @@ int generate_id(const std::vector<int> &ids) {
 
     throw NoFreeIdException();
 }
+
 
