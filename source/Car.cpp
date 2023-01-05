@@ -222,6 +222,9 @@ void Car::set_configuration() {
         configuration = "no_config";
     }
 }
+void Car::set_is_need_repair(const bool &is_need_repair) {
+    this->is_need_repair = is_need_repair;
+}
 void Car::set_id(const size_t &id) {
     I_Transport::set_id(id);
 }

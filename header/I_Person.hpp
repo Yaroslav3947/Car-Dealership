@@ -21,7 +21,7 @@ protected:
     std::string name;
 public:
     I_Person(std::string name = default_name, int age = default_age);
-    int get_age() const;
+    int get_age() const ;
     I_Person() = default;
     std::string get_name() const;
     virtual ~I_Person() = default;
@@ -30,6 +30,7 @@ public:
     void printInfo(std::ostream &os) const override;
     virtual void add_car(I_Transport::PtrT car) = 0;
     virtual std::list<I_Transport::PtrT> get_cars() = 0;
+    virtual void repair_car(I_Transport::PtrT car) = 0;
 };
 
 

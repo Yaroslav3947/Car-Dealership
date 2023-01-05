@@ -86,17 +86,34 @@ size_t get_id_of_wanted_car() {
     std::cin >> wanted_car_id;
     return wanted_car_id;
 }
+void print_half_line(const int &size_of_line, const std::string &line) {
+    for (size_t i{0}; i < (size_of_line / 2) - (line.size() / 2); i++) {
+        std::cout << "=";
+    }
+}
+void print_headline(const std::string &line = "") {
+    const int size_of_line = 150;
+    print_half_line(size_of_line, line);
+    std::cout << line;
+    print_half_line(size_of_line, line);
+    std::cout << std::endl;
+}
 void car_purchase(std::shared_ptr<I_Person> client,const std::list <I_Transport::PtrT> &cars) {
     size_t wanted_car_id = get_id_of_wanted_car();
+    bool is_bought = false;
         for(auto car: cars) {
             if(wanted_car_id == car->get_id()) {
+                is_bought = true;
                 client->add_car(car);
             }
         }
+        if(is_bought == false) {
+            std::cout << "We do not have car with this id\n";
+        }
 }
 void display_info_about_client(std::shared_ptr<I_Person> client) {
+    print_headline("MY_CARS"); 
     const int singular_car = 1;
-    std::cout << "=====================================================================MY_CARS=====================================================================\n";
     if(client->get_number_of_cars() == singular_car) {
         std::cout << client->get_name() << ", you have " << client->get_number_of_cars() << " car " << std::endl;
     }
@@ -104,20 +121,17 @@ void display_info_about_client(std::shared_ptr<I_Person> client) {
         std::cout << client->get_name() << ", you have " << client->get_number_of_cars() << " cars" << std::endl;
     }
     std::list<I_Transport::PtrT> clients_cars = client->get_cars();
-    display(clients_cars); 
-    std::cout << "=====================================================================MY_CARS=====================================================================\n";
+    display(clients_cars);
+    print_headline("MY_CARS"); 
 }
 enum Sorting_option {
     SORT = 1,
     CONTINUE_BUYING = 2,
 };
-void print_cars_headline() {
-    std::cout << "=======================================================CARS==============================================================================\n";
-}
 void purchasing_car_from_database(std::shared_ptr<I_Person> client, const std::list <I_Transport::PtrT> &cars) {
-    print_cars_headline();
+    print_headline("CARS");
     display(cars);
-    print_cars_headline();
+    print_headline("CARS");
     ask_for_sorting();
     size_t choice;
     do {
@@ -148,10 +162,11 @@ enum TypeOfPurchasing {
     DATABASE = 1,
     CUSTOM = 2,
     MY_CARS = 3,
-    QUIT = 4,
+    REPAIR = 4,
+    QUIT = 5,
 };
 void show_posibilities(std::shared_ptr<I_Person> client) {
-    std::cout << client->get_name() << ", choose one variant below:\n1 - buy new car from database\n2 - buy custom car\n3 - show my cars\n4 - quit program\n";
+    std::cout << client->get_name() << ", choose one variant below:\n1 - buy new car from database\n2 - buy custom car\n3 - show my cars\n4 - repair car\n5 - quit program\n";
 }
 void show_clients_cars(std::shared_ptr<I_Person> client) {
     if(client->get_number_of_cars() == 0) { ////TODO: magic number
@@ -160,6 +175,51 @@ void show_clients_cars(std::shared_ptr<I_Person> client) {
     else {
         display_info_about_client(client);
     }
+}
+size_t get_id_of_car_to_repair() {
+    size_t id;
+    std::cout << "Choose car you want to repair by id\nEnter id:";
+    std::cin >> id;
+    return id;
+}
+void display_message_of_no_cars() {
+    print_headline();
+    std::cout << "You do not have any car to repair, go to the salon and buy one" << std::endl;
+    print_headline();
+}
+void repair_car_by_id(const std::list<I_Transport::PtrT> &cars, std::shared_ptr<I_Person> worker) {
+    size_t id = get_id_of_car_to_repair();
+    bool is_repaired = false;
+    for(const auto car: cars) {
+        if(id == car->get_id()) {
+            is_repaired = true;
+            worker->repair_car(car);
+        }
+    }
+    if(is_repaired == false) {
+        std::cout << "You do not have car with this id\n";
+    }
+}
+void display_info_about_worker(std::shared_ptr<I_Person> worker) {
+    print_headline("WORKER");
+    std::cout << worker->get_name() << " has been repairing your car, here is info about worker:" << std::endl;
+    std::cout << *worker << std::endl;
+    print_headline();
+}
+void repair_clients_car(std::shared_ptr<I_Person> client) {
+
+    if(client->get_number_of_cars() == 0) { ////TODO: magic number
+        display_message_of_no_cars();
+        return;
+    }
+
+    std::shared_ptr<I_Person> worker = std::make_shared<Worker>("Steve", 24);
+    std::list<I_Transport::PtrT> cars = client->get_cars();
+
+    display_info_about_client(client);
+    repair_car_by_id(cars, worker);
+    display_info_about_worker(worker);
+    return;
 }
 void main_drive(std::shared_ptr<I_Person> client, std::list <I_Transport::PtrT> &cars) {
     size_t choice;
@@ -175,14 +235,19 @@ void main_drive(std::shared_ptr<I_Person> client, std::list <I_Transport::PtrT> 
                 purchasing_custom_car(client, cars);
                 break;
             }
-            case MY_CARS : {
+            case MY_CARS: {
                 show_clients_cars(client);
+            }
+            case REPAIR: {
+                repair_clients_car(client);
+                ////TODO: worker repair_car solve it
+                break;
             }
             case QUIT: {
                 break;
             }
             default: {
-                std::cout << "We have only 4 options" << std::endl;
+                std::cout << "We have only 5 options" << std::endl;
             }
         }
     } while(choice != QUIT);
@@ -200,8 +265,8 @@ size_t get_age() {
     return age;    
 }
 void greetings(std::string &name, size_t &age) {
-    std::cout << "=====================================================================================================================================\n";
-    std::cout << "Hello\nWelome to our company\n";
+    print_headline();
+    std::cout << "Hello,\nWelome to our company!\n";
     name = get_name();
     age = get_age();
     return;

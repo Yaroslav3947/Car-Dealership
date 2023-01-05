@@ -4,7 +4,7 @@
 #include <list>
 
 #include <I_Person.hpp>
-#include <I_Transport.hpp>
+// #include <I_Transport.hpp>
 
 
 
@@ -15,11 +15,12 @@ class Client final : public I_Person {
     std::list <I_Transport::PtrT> cars;
     int number_of_cars = default_number_of_cars;
 public:
-    void set_id(const size_t &id) override;
     Client(std::string name = default_name, int age = default_age);
-    int get_number_of_cars() const;
+    void set_id(const size_t &id) override;
+    int get_number_of_cars() const override;
     ~Client() = default;
-    std::list<I_Transport::PtrT> get_cars();
-    void add_car(I_Transport::PtrT car);
+    std::list<I_Transport::PtrT> get_cars() override;
+    void add_car(I_Transport::PtrT car) override;
     void printInfo(std::ostream &os) const override;
+    void repair_car(I_Transport::PtrT car) override{}
 };

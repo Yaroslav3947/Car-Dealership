@@ -9,3 +9,4 @@
 8              AUDI           A3             Bianco_Courmayeur        Germany             1995           10.5           15000          1              hatchback      5              standart       1              Diesel         
 9              Subaru         OutBack        Arrow_Gray               Japan               2015           10.2           17700          1              Jeep           5              standart       0              Gas            
 10             Volkswagen     b7             Thundernight_Metallic    Germany             2014           11             15000          1              Sedan          5              standart       0              Gas            
+11             BMW            X5             Arrow_Gray               Germany             2009           15.1           17600          1              Jeep           5              standart       1              Diesel         
