@@ -4,7 +4,9 @@
 #include <Worker.hpp>
 
 Worker::Worker(std::string name, int age, int wage) 
-    : I_Person{name, age}, wage{wage} {
+    : I_Person{id, name, age}, wage{wage} {
+        std::vector <int> all_ids = get_all_ids();
+        this->id = generate_id(all_ids);
         if(!isNormalWage(wage)) {
             throw IllegalWageException();
         }

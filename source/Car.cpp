@@ -14,26 +14,52 @@ Car::Car(int id, std::string brand, std::string model, std::string color, std::s
         set_configuration();
 }
 
+// void Car::printInfo(std::ostream &os) const {
+//     const int field_size1 = 15;
+//     const int field_size3 = 25;
+//     os << "[Car: id: " << id  << ":" << brand << ": " << model << ":" << color << ":" << country << ":" << year_of_manufacture << " year: " << fuel_consumption << "lit/100km: $" << price << ":";
+//     if (is_new)
+//         os << "new: ";
+//     else
+//         os << "used: ";
+//     os << car_body_styles << ":" << number_of_doors << " doors: " << configuration << ":";
+//     if (is_need_repair)
+//         os << "need_repair:";
+//     else
+//         os << "doesn't_need_repair:";
+//     os << type_of_fuel << "]";
+// }
 void Car::printInfo(std::ostream &os) const {
-    os << "[Car: id: " << id  << ": "<< brand << ": " << model << ": " << color << ": " << country << ": " << year_of_manufacture << " year: " << fuel_consumption << "lit/100km: $" << price << ": ";
-    if (is_new)
-        os << "new: ";
-    else
-        os << "used: ";
-    os << car_body_styles << ": " << number_of_doors << " doors: " << configuration << ": ";
-    if (is_need_repair)
-        os << "need_repair: ";
-    else
-        os << "doesn't_need_repair: ";
-    os << type_of_fuel << "]";
+        const int field_size1 = 15;
+        const int field_size3 = 25;
+        os << "["  << std::setw(5) << std::left << id
+           << std::setw(12) << std::left << brand
+           << std::setw(15) << std::left << model
+           << std::setw(23) << std::left << color
+           << std::setw(11) << std::left << country
+           << std::setw(10) << std::left << year_of_manufacture
+           << std::setw(8) << std::left << fuel_consumption
+           << std::setw(13) << std::left << price;
+        if (is_new)
+            os << std::setw(7) << std::left << "new";
+        else
+            os << std::setw(7) << std::left << "used";
+        os << std::setw(10) << std::left << car_body_styles
+           << std::setw(7) << std::left << number_of_doors 
+           << std::setw(11) << std::left << configuration;
+        if (is_need_repair)
+            os << std::setw(15) << std::left << "need";
+        else
+            os << std::setw(15) << std::left << "doesn't_need";
+        os << std::setw(7) << std::left << type_of_fuel << "]";
 }
 
-void Car::write_info_to_file() {
+void Car::write_info_to_file(const std::string &path) {
     const int field_size1 = 15;
     const int field_size2 = 20;
     const int field_size3 = 25;
     std::ofstream out_file;
-    out_file.open(path_to_car_file, std::fstream::app);
+    out_file.open(path, std::fstream::app);
     if(!out_file.is_open()) {
         throw FileOpenIssue();
     }
@@ -200,9 +226,9 @@ void Car::inputInfo(std::list <PtrT> &cars) {
     input_is_need_repair(is_need_repair);
     set_configuration();
     set_number_of_doors(car_body_styles, number_of_doors);
-    std::vector<int> ids = get_ids_from_cars(cars);
-    this->id = generate_id(ids);
-    this->write_info_to_file();
+    std::vector<int> all_ids = get_all_ids();
+    this->id = generate_id(all_ids);
+    this->write_info_to_file(path_to_car_file);
     cars.push_back(shared_from_this());
 }
 void Car::set_configuration() {

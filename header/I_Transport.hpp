@@ -28,6 +28,7 @@ protected:
     static constexpr const int default_id = -1;  
     static constexpr const double default_price = 0.0;
     static constexpr const bool default_is_new = true;
+    const std::string path_to_car_file = "Car.txt";
     static constexpr const int default_year_of_manufacture = 0;
     static constexpr const double default_fuel_consumption = 0.0;
     static constexpr const char *default_model = "unknown model";
@@ -53,7 +54,7 @@ public:
     virtual ~I_Transport() = default;
     double get_fuel_consumption() const;
     int get_year_of_manufacture() const;
-    virtual void write_info_to_file() = 0;
+    virtual void write_info_to_file(const std::string &path) = 0;
     using PtrT = std::shared_ptr<I_Transport>;
     virtual void set_id(const size_t &id) = 0;
     virtual bool get_is_need_repair() const = 0;

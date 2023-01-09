@@ -4,11 +4,14 @@
 #include <I_Person.hpp>
 
 
-I_Person::I_Person(std::string name, int age) 
-    : name{name}, age{age} {
+I_Person::I_Person(int id, std::string name, int age) 
+    : name{name}, age{age}, id{id} {
         if(age < default_age) {
             throw IllegalAgeException(); 
         }
+}
+int I_Person::get_id() const {
+    return id;
 }
 int I_Person::get_age() const {
     return age;

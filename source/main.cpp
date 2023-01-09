@@ -16,31 +16,36 @@
 #include <UtilChecking.hpp>
 
 enum Sorting_cars {
-    BY_BRAND = 1,
-    BY_COLOR = 2,
-    BY_COUNTRY = 3,
-    BY_MODEL = 4,
-    BY_PRICE = 5,
-    BY_FUEL = 6,
-    CONTINUE = 7,
+    BY_BRAND = '1',
+    BY_COLOR = '2',
+    BY_COUNTRY = '3',
+    BY_MODEL = '4',
+    BY_PRICE = '5',
+    BY_FUEL = '6',
+    CONTINUE = '7',
 };
+void print_half_line() {
+    std::cout << "===================================\n";
+}
 void ask_for_sorting() {
+    print_half_line();
     std::cout << "Do you want to sort cars?\n1 - show way of sorting\n2 - continue buying without sorting\n";
+    print_half_line();
     return;
 }
-size_t getChoice() {
-    size_t choice;
+char getChoice() {
+    char choice;
     std::cout << "Input choice:";
     std::cin >> choice;
     return choice;
 } 
 void show_way_of_sorting() {
-    std::cout << "===================================\n";
+    print_half_line();
     std::cout << "Which way do you want to sort cars?\n1 - by brand\n2 - by color\n3 - by country\n4 - by model\n5 - by price\n6 - by fuel consumption\n7 - continue buying\n";
-    std::cout << "===================================\n";
-}
+    print_half_line();
+    }
 void sorting_cars(std::list <I_Transport::PtrT> cars) {
-    size_t choice;
+    char choice;
     do {
         show_way_of_sorting();
         choice = getChoice();
@@ -91,14 +96,14 @@ void print_half_line(const int &size_of_line, const std::string &line) {
         std::cout << "=";
     }
 }
-void print_headline(const std::string &line = "") {
-    const int size_of_line = 150;
+void print_headline_for_greetings(const std::string &line = "") {
+    const int size_of_line = 156;
     print_half_line(size_of_line, line);
     std::cout << line;
     print_half_line(size_of_line, line);
     std::cout << std::endl;
 }
-void car_purchase(std::shared_ptr<I_Person> client,const std::list <I_Transport::PtrT> &cars) {
+void car_purchase(std::shared_ptr<I_Person> client, const std::list <I_Transport::PtrT> &cars) {
     size_t wanted_car_id = get_id_of_wanted_car();
     bool is_bought = false;
         for(auto car: cars) {
@@ -112,28 +117,28 @@ void car_purchase(std::shared_ptr<I_Person> client,const std::list <I_Transport:
         }
 }
 void display_info_about_client(std::shared_ptr<I_Person> client) {
-    print_headline("MY_CARS"); 
+    print_headline_for_greetings("MY_CARS"); 
     const int singular_car = 1;
-    if(client->get_number_of_cars() == singular_car) {
-        std::cout << client->get_name() << ", you have " << client->get_number_of_cars() << " car " << std::endl;
+    std::list<I_Transport::PtrT> clients_cars = client->get_cars();
+    if(clients_cars.size() == singular_car) {
+        std::cout << client->get_name() << ", you have " << clients_cars.size() << " car " << std::endl;
     }
     else {
-        std::cout << client->get_name() << ", you have " << client->get_number_of_cars() << " cars" << std::endl;
+        std::cout << client->get_name() << ", you have " << clients_cars.size() << " cars" << std::endl;
     }
-    std::list<I_Transport::PtrT> clients_cars = client->get_cars();
     display(clients_cars);
-    print_headline("MY_CARS"); 
+    print_headline_for_greetings("MY_CARS"); 
 }
 enum Sorting_option {
-    SORT = 1,
-    CONTINUE_BUYING = 2,
+    SORT = '1',
+    CONTINUE_BUYING = '2',
 };
 void purchasing_car_from_database(std::shared_ptr<I_Person> client, const std::list <I_Transport::PtrT> &cars) {
-    print_headline("CARS");
+    print_headline_for_greetings("CARS");
     display(cars);
-    print_headline("CARS");
+    print_headline_for_greetings("CARS");
     ask_for_sorting();
-    size_t choice;
+    char choice;
     do {
         choice = getChoice();
         switch (choice) {
@@ -159,18 +164,20 @@ void purchasing_custom_car(std::shared_ptr<I_Person> client, std::list <I_Transp
     display_info_about_client(client);
 }
 enum TypeOfPurchasing {
-    DATABASE = 1,
-    CUSTOM = 2,
-    MY_CARS = 3,
-    REPAIR = 4,
-    QUIT = 5,
+    DATABASE = '1',
+    CUSTOM = '2',
+    MY_CARS = '3',
+    REPAIR = '4',
+    QUIT = '5',
 };
 void show_posibilities(std::shared_ptr<I_Person> client) {
-    std::cout << client->get_name() << ", choose one variant below:\n1 - buy new car from database\n2 - buy custom car\n3 - show my cars\n4 - repair car\n5 - quit program\n";
+    std::cout << client->get_name() << ", choose one variant below:\n1 - buy new car from salon\n2 - buy custom car\n3 - show my cars\n4 - repair car\n5 - quit program\n";
 }
 void show_clients_cars(std::shared_ptr<I_Person> client) {
-    if(client->get_number_of_cars() == 0) { ////TODO: magic number
+    std::list<I_Transport::PtrT> clients_cars = client->get_cars();
+    if(clients_cars.size() == 0) { ////TODO: magic number
         std::cout << client->get_name() << ", you do not have any cars, go to the shop and buy one!!!\n"; 
+        display_info_about_client(client);
     }
     else {
         display_info_about_client(client);
@@ -183,9 +190,9 @@ size_t get_id_of_car_to_repair() {
     return id;
 }
 void display_message_of_no_cars() {
-    print_headline();
+    print_headline_for_greetings();
     std::cout << "You do not have any car to repair, go to the salon and buy one" << std::endl;
-    print_headline();
+    print_headline_for_greetings();
 }
 void repair_car_by_id(const std::list<I_Transport::PtrT> &cars, std::shared_ptr<I_Person> worker) {
     size_t id = get_id_of_car_to_repair();
@@ -201,10 +208,10 @@ void repair_car_by_id(const std::list<I_Transport::PtrT> &cars, std::shared_ptr<
     }
 }
 void display_info_about_worker(std::shared_ptr<I_Person> worker) {
-    print_headline("WORKER");
+    print_headline_for_greetings("WORKER");
     std::cout << worker->get_name() << " has been repairing your car, here is info about worker:" << std::endl;
     std::cout << *worker << std::endl;
-    print_headline();
+    print_headline_for_greetings();
 }
 void repair_clients_car(std::shared_ptr<I_Person> client) {
 
@@ -222,7 +229,7 @@ void repair_clients_car(std::shared_ptr<I_Person> client) {
     return;
 }
 void main_drive(std::shared_ptr<I_Person> client, std::list <I_Transport::PtrT> &cars) {
-    size_t choice;
+    char choice;
     do {
         show_posibilities(client);
         choice = getChoice();
@@ -237,6 +244,7 @@ void main_drive(std::shared_ptr<I_Person> client, std::list <I_Transport::PtrT> 
             }
             case MY_CARS: {
                 show_clients_cars(client);
+                break;
             }
             case REPAIR: {
                 repair_clients_car(client);
@@ -265,29 +273,26 @@ size_t get_age() {
     return age;    
 }
 void greetings(std::string &name, size_t &age) {
-    print_headline();
+    print_headline_for_greetings();
     std::cout << "Hello,\nWelome to our company!\n";
     name = get_name();
     age = get_age();
     return;
 }
-auto input_info_about_client() {
-    size_t age{};
-    std::string name{};
-    greetings(name, age);
-    return std::make_shared<Client>(name, age);
+auto input_info_about_client(const int &id, const std::string &client_name) {
+    size_t age{20};
+    // greetings(name, age);
+    return std::make_shared<Client>(id, client_name, age);
 }
 void mainProblem() {
     std::list <I_Transport::PtrT> cars = get_list_of_cars();
-    // Login login;
-    // login.startToLogin();
-    std::shared_ptr<I_Person> client = input_info_about_client();    
-    main_drive(client, cars);
-
+    Login login;
+    login.startToLogin();
+    std::shared_ptr<I_Person> client = input_info_about_client(login.get_id(), login.get_username());   
+    main_drive(client, cars);    
     return; 
 }
-int main() {
-    
+int main() {    
     try {
         mainProblem();
     }

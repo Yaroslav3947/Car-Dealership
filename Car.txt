@@ -10,3 +10,6 @@
 9              Subaru         OutBack        Arrow_Gray               Japan               2015           10.2           17700          1              Jeep           5              standart       0              Gas            
 10             Volkswagen     b7             Thundernight_Metallic    Germany             2014           11             15000          1              Sedan          5              standart       0              Gas            
 11             BMW            X5             Arrow_Gray               Germany             2009           15.1           17600          1              Jeep           5              standart       1              Diesel         
+12             BMW            X5             Purple_Sector            Germany             2021           15.1           99000          1              Jeep           5              vip            0              Diesel         
+19             Renault        Megane         Arrow_Gray               France              2011           5.6            9999           1              hatchback      5              standart       0              Diesel         
+23             Shkoda         Octavia        Electric_Blue            Czech               2011           7.3            4000           1              Sedan          5              econom         1              Diesel         

@@ -19,6 +19,7 @@ bool isNormalYearForCar(const int &num) {
     return yearOfFirstCar <= num &&  num <= ceilOfCarYear;
 }
 void display(std::list <I_Transport::PtrT> list) {
+    print_headline();
     for(const auto x: list) {
         std::cout << *x << std::endl;
     }
@@ -60,12 +61,30 @@ std::list<I_Transport::PtrT> get_list_of_cars() {
     in_file.close();
     return list;
 }
-std::vector<int> get_ids_from_cars(std::list<I_Transport::PtrT> &cars) {
-    std::vector <int> ids;
-    for(auto x: cars) {
-        ids.push_back(x->get_id());
+std::vector<int> get_all_ids() {
+    const std::string path_to_ids = "Id.txt";
+    std::vector<int> ids;
+    std::ifstream in_file;
+    in_file.open(path_to_ids);
+    if (!in_file) {
+        throw FileOpenIssue();
+    }
+    int id;
+    while(!in_file.eof()) {
+        in_file >> id;
+        ids.push_back(id);
     }
     return ids;
+    in_file.close();
+}
+void write_to_id_file(const int &free_id) {
+    const std::string path_to_ids = "Id.txt";
+    std::ofstream out_file;
+    out_file.open(path_to_ids, std::fstream::app);
+    if(!out_file) {
+        throw FileOpenIssue();
+    }
+    out_file << free_id << std::endl;
 }
 int generate_id(const std::vector<int> &ids) {
     if(ids.size() == 0) {
@@ -75,13 +94,31 @@ int generate_id(const std::vector<int> &ids) {
     int free_id {0};
     for(size_t i = 0;i<max_value_of_id;i++) {
         if(i != ids[i]) {
-            free_id = i; break;
+            free_id = i;
+            write_to_id_file(free_id);
+            break;
         }
     }
     if(free_id != 0)
         return free_id;
 
     throw NoFreeIdException();
+}
+void print_headline() {
+ std::cout << std::setw(6) << std::left << "ID"
+           << std::setw(12) << std::left << "BRAND"
+           << std::setw(15) << std::left << "MODEL"
+           << std::setw(23) << std::left << "COLOR"
+           << std::setw(11) << std::left << "COUNTRY"
+           << std::setw(10) << std::left << "YEAR"
+           << std::setw(8) << std::left << "FUEL"
+           << std::setw(13) << std::left << "PRICE"
+           << std::setw(7) << std::left << "IS NEW"
+           << std::setw(10) << std::left << "STYLE"
+           << std::setw(7) << std::left << "DOORS" 
+           << std::setw(11) << std::left << "CONFIG"
+           << std::setw(15) << std::left << "REPAIR"
+           << std::setw(7) << std::left << "FUEL" << std::endl;
 }
 
 

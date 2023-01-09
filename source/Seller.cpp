@@ -2,8 +2,8 @@
 
 #include <Seller.hpp>
 
-Seller::Seller(std::string name, int age, int wage, int number_of_sold_cars) 
-    :I_Person{name, age}, wage{wage}, number_of_sold_cars{number_of_sold_cars} {
+Seller::Seller(int id, std::string name, int age, int wage, int number_of_sold_cars) 
+    :I_Person{id, name, age}, wage{wage}, number_of_sold_cars{number_of_sold_cars} {
 }
 int Seller::get_code_of_seller() const {
     return code_of_seller;
