@@ -1,11 +1,12 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <exception>
 
 #include <Login.hpp>
 
 char get_choice();
-void welcomeToSystem();
+void welcomeToSystemMessage();
 void showPosibilities();
 std::string getPassword();
 std::string getUsername();
@@ -13,7 +14,7 @@ void passOrLoginIsNotRight();
 void YouAreAlreadyInSystem();
 void youHaveSuccesfullyLoggedIn();
 bool IsPassOk(const std::string &password);
-void succesfullyRegister(const std::string &username, const std::string &password);
+void put_info_into_file(const std::string &username, const std::string &password);
 
 enum choiceToLogin { 
     LOGIN = 'L',
@@ -44,11 +45,42 @@ bool IsPassOk(const std::string &password) {
     else
         return false;
 }
-
+std::vector <std::string> get_all_usernames() {
+    std::vector<std::string> all_usernames;
+    std::string path_to_folder_with_pass_and_usernames = "D:\\PassAndUsernames.txt";
+    std::ifstream in_file;
+    in_file.open(path_to_folder_with_pass_and_usernames);
+    if (!in_file) {
+        throw FileOpenIssue();
+    }
+    size_t number_of_line{0};
+    std::string line{};
+    while (!in_file.eof()) {
+        if (number_of_line % 3 == 0) {
+            in_file >> line;
+            all_usernames.push_back(line);
+        }
+        number_of_line++;
+    }
+    return all_usernames;
+    in_file.close();
+}
 std::string getUsername() {
+    std::vector<std::string> all_usernames = get_all_usernames();
     std::string username;
-    std::cout << "Enter username : ";
-    std::cin >> username;
+    bool is_taken;
+    do {
+        is_taken = false;
+        std::cout << "Enter username: ";
+        std::cin >> username;
+        for (size_t i{0}; i < all_usernames.size(); i++) {
+            if (username == all_usernames[i]) {
+                is_taken = true;
+                std::cout << "This username is taken, choose another one\n";
+            }
+        }
+    } while (is_taken);
+
     return username;
 }
 std::string getPassword() {
@@ -85,24 +117,55 @@ int getId() {
     std::cin >> id;
     return id;
 }
+void get_user_data(const std::string &username, const std::string &password, int &id, std::string &fileUsername, std::string &filePassword) {
+    const std::string path_to_folder_with_pass_and_usernames = "D:\\PassAndUsernames.txt";
+    std::ifstream in_file;
+    in_file.open(path_to_folder_with_pass_and_usernames);
+    if(!in_file) {
+        throw FileOpenIssue();
+    }
+    std::string line1{}, line2{}, line3{};
+    while(!in_file.eof()) {
+        in_file >> line1;
+        in_file >> line2;
+        in_file >> line3;
+        if(line1 == username && line2 == password) {
+            fileUsername = line1;
+            filePassword = line2;
+            id = stoi(line3);
+        }
+    }
+
+    in_file.close();
+}
+std::string enter_username() {
+    std::string username;
+    std::cout << "Enter username:";
+    std::cin >> username;
+    return username;
+}
+std::string enter_password() {
+    std::string password;
+    std::cout << "Enter password:";
+    std::cin >> password;
+    return password;
+}
 void Login::isLoggedIn() {
     size_t numberOfTries{0};
     bool is_logged_in = false;
     do {
         numberOfTries++;
-        if(numberOfTries > 1) { ////TODO: magic number
+        if(numberOfTries > 1) { 
+            ////TODO: magic number
             passOrLoginIsNotRight();
         } 
-        id = getId();
-        std::string username = getUsername();
-        this->username = username;
-        std::string password = getPassword();
+        username = enter_username();
+        password = enter_password();
         std::string fileUsername;
         std::string filePassword;
-        const std::string path = "D:\\" + std::to_string(id) + ".txt";
-        std::ifstream in_file(path);
-        std::getline(in_file, fileUsername);
-        std::getline(in_file, filePassword);
+        int id;
+        get_user_data(username, password, id, fileUsername, filePassword);
+        this->id = id;
         if(fileUsername == username && filePassword == password) {
             is_logged_in = true;
         } else {
@@ -110,7 +173,7 @@ void Login::isLoggedIn() {
         }
     } while (!is_logged_in);
 }
-void welcomeToSystem() {
+void welcomeToSystemMessage() {
     std::cout << "Hello, welcome to the system" << std::endl;
 }
 void only3Options() {
@@ -125,27 +188,39 @@ void youHaveSuccesfullyLoggedIn() {
 void YouAreAlreadyInSystem() {
     std::cout << "You are already in system";
 }
-void succesfullyRegister(const int id, const std::string &username, const std::string &password) {
-    const std::string path = "D:\\" + std::to_string(id) + ".txt";
-    std::cout << "================================================\nYou have successfully registered\nYour id is " << id <<"\nremember it\n";
+void put_info_into_file(const std::string &username, const std::string &password, const int &id) {
+    const std::string path = "D:\\PassAndUsernames.txt";
+    std::cout << "================================================\nYou have successfully registered\n";
     std::ofstream out_file;
-    out_file.open(path);
-    out_file << username << std::endl << password << std::endl;
+    out_file.open(path, std::ios::app);
+    if(!out_file) {
+        throw "Problems with file";
+    }
+    out_file << username << std::endl << password << std::endl << id << std::endl;
     out_file.close();
 }
+int getAge() {
+    int age;
+    std::cout << "Enter age:";
+    std::cin >> age;
+    if(!isNormalAge(age)) {
+        throw IllegalAgeException();
+    }
+    return age;
+}
 void Login::singUpSystem() {
-    std::string username = getUsername();
-    this->username = username;
-    std::string password = getPassword();
+    username = getUsername();
+    password = getPassword();
+    age = getAge();
     std::vector <int> all_ids = get_all_ids();
-    this->id = generate_id(all_ids);
-    succesfullyRegister(id, username, password);
-    welcomeToSystem();
+    id = generate_id(all_ids);
+    put_info_into_file(username, password, id);
+    welcomeToSystemMessage();
 }
 void Login::logInSystem() {
     isLoggedIn();
     youHaveSuccesfullyLoggedIn();
-    welcomeToSystem();
+    welcomeToSystemMessage();
 }
 void Login::startToLogin() {
     char choice{};
@@ -168,10 +243,4 @@ void Login::startToLogin() {
         }
     } while (choice != SINGUP && choice != LOGIN);
 
-}
-std::string Login::get_username() const {
-    return this->username;
-}
-int Login::get_id() const {
-    return this->id;
 }

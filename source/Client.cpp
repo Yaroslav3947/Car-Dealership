@@ -34,10 +34,6 @@ std::list<I_Transport::PtrT> Client::get_cars() {
     if (!in_file) {
         throw FileOpenIssue();
     }
-    std::string username;
-    std::string password;
-    in_file >> username;
-    in_file >> password;
     while (in_file >> id >> brand >> model >> color >> country >> year_of_manufacture 
             >> fuel_consumption >> price >> is_new >> car_body_styles >> number_of_doors
             >> configuration >> is_need_repair >> type_of_fuel) {

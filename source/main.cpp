@@ -175,7 +175,8 @@ void show_posibilities(std::shared_ptr<I_Person> client) {
 }
 void show_clients_cars(std::shared_ptr<I_Person> client) {
     std::list<I_Transport::PtrT> clients_cars = client->get_cars();
-    if(clients_cars.size() == 0) { ////TODO: magic number
+    if(clients_cars.size() == 0) { 
+        ////TODO: magic number
         std::cout << client->get_name() << ", you do not have any cars, go to the shop and buy one!!!\n"; 
         display_info_about_client(client);
     }
@@ -215,7 +216,8 @@ void display_info_about_worker(std::shared_ptr<I_Person> worker) {
 }
 void repair_clients_car(std::shared_ptr<I_Person> client) {
 
-    if(client->get_number_of_cars() == 0) { ////TODO: magic number
+    if(client->get_number_of_cars() == 0) { 
+        ////TODO: magic number
         display_message_of_no_cars();
         return;
     }
@@ -260,35 +262,11 @@ void main_drive(std::shared_ptr<I_Person> client, std::list <I_Transport::PtrT> 
         }
     } while(choice != QUIT);
 }
-std::string get_name() {
-    std::string name;
-    std::cout << "Enter your name:";
-    std::cin >> name;
-    return name;
-}
-size_t get_age() {
-    size_t age;
-    std::cout << "How old are you:";
-    std::cin >> age;
-    return age;    
-}
-void greetings(std::string &name, size_t &age) {
-    print_headline_for_greetings();
-    std::cout << "Hello,\nWelome to our company!\n";
-    name = get_name();
-    age = get_age();
-    return;
-}
-auto input_info_about_client(const int &id, const std::string &client_name) {
-    size_t age{20};
-    // greetings(name, age);
-    return std::make_shared<Client>(id, client_name, age);
-}
 void mainProblem() {
     std::list <I_Transport::PtrT> cars = get_list_of_cars();
     Login login;
     login.startToLogin();
-    std::shared_ptr<I_Person> client = input_info_about_client(login.get_id(), login.get_username());   
+    std::shared_ptr<I_Person> client = std::make_shared<Client>(login.get_id(), login.get_username(), login.get_age()); 
     main_drive(client, cars);    
     return; 
 }
