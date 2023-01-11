@@ -6,14 +6,14 @@
 #include <iostream>
 #include <algorithm>
 
-#include <Car.hpp>
-#include <Login.hpp>
-#include <Client.hpp>
-#include <Worker.hpp>
-#include <Seller.hpp>
-#include <I_Person.hpp>
-#include <I_Transport.hpp>
-#include <UtilChecking.hpp>
+#include "Car.hpp"
+#include "Login.hpp"
+#include "Client.hpp"
+#include "Worker.hpp"
+#include "Seller.hpp"
+#include "I_Person.hpp"
+#include "I_Transport.hpp"
+#include "UtilChecking.hpp"
 
 enum Sorting_cars {
     BY_BRAND = '1',
@@ -215,9 +215,8 @@ void display_info_about_worker(std::shared_ptr<I_Person> worker) {
     print_headline_for_greetings();
 }
 void repair_clients_car(std::shared_ptr<I_Person> client) {
-
-    if(client->get_number_of_cars() == 0) { 
-        ////TODO: magic number
+    const int zero_cars = 0;
+    if(client->get_number_of_cars() == zero_cars) { 
         display_message_of_no_cars();
         return;
     }

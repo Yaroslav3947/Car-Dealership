@@ -1,6 +1,6 @@
 #pragma once
 
-#include <I_Person.hpp>
+#include "I_Person.hpp"
 
 class Worker : public I_Person {
     int wage;

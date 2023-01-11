@@ -1,7 +1,7 @@
 #include <string>
 #include <iostream>
 
-#include <Worker.hpp>
+#include "Worker.hpp"
 
 Worker::Worker(std::string name, int age, int wage) 
     : I_Person{id, name, age}, wage{wage} {

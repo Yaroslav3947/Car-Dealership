@@ -5,25 +5,24 @@
 #include <memory>
 #include <string>
 
-#include <I_Printable.hpp>
-#include <FileOpenIssue.hpp>
-
-#include <NoFreeIdException.hpp>
-#include <IllegalPriceException.hpp>
-#include <IllegalFuelComsumptionException.hpp>
-#include <IllegalYearOfManufactureException.hpp>
+#include "I_Printable.hpp"
+#include "FileOpenIssue.hpp"
+#include "NoFreeIdException.hpp"
+#include "IllegalPriceException.hpp"
+#include "IllegalFuelComsumptionException.hpp"
+#include "IllegalYearOfManufactureException.hpp"
 
 class I_Transport : public I_Printable {
     const int floor_price = 0;
 protected:
     int id;
-    bool is_new;
-    double price;
-    std::string brand;
     std::string model;
     std::string country;
+    std::string brand;
     std::string color;
     double fuel_consumption;
+    double price;
+    bool is_new;
     int year_of_manufacture;
     static constexpr const int default_id = -1;  
     static constexpr const double default_price = 0.0;

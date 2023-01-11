@@ -5,7 +5,7 @@
 #include <fstream>
 #include <iostream>
 
-#include <Car.hpp>
+#include "Car.hpp"
 
 
 Car::Car(int id, std::string brand, std::string model, std::string color, std::string country, int year_of_manufacture, double fuel_consumption, double price, bool is_new, std::string car_body_styles, int number_of_doors, bool is_need_repair, std::string type_of_fuel)
@@ -13,6 +13,7 @@ Car::Car(int id, std::string brand, std::string model, std::string color, std::s
         set_number_of_doors(car_body_styles, number_of_doors);
         set_configuration();
 }
+
 
 // void Car::printInfo(std::ostream &os) const {
 //     const int field_size1 = 15;
@@ -30,8 +31,6 @@ Car::Car(int id, std::string brand, std::string model, std::string color, std::s
 //     os << type_of_fuel << "]";
 // }
 void Car::printInfo(std::ostream &os) const {
-        const int field_size1 = 15;
-        const int field_size3 = 25;
         os << "["  << std::setw(5) << std::left << id
            << std::setw(12) << std::left << brand
            << std::setw(15) << std::left << model
@@ -99,7 +98,6 @@ void input_car_body_style(std::string &car_body_styles) {
     };
     std::cout << "Choose one of the styles below:\n";
     print_preferences_of(styles);
-    Car_body_style style;
     int choice{};
     std::cin >> choice;
     switch(choice) {
@@ -115,7 +113,6 @@ enum Type_of_fuel {
     Gas = 1, Diesel = 2
 };
 void input_type_of_fuel(std::string &type_of_fuel) {
-    Type_of_fuel fuel_type;
     std::cout << "Input type of fuel:\n1 - Gas\n2 - Diesel: ";
     int choice{};
     std::cin >> choice;
@@ -129,7 +126,6 @@ enum Is_need_repair {
     YES = 1, NO = 2
 };
 void input_is_need_repair(bool &is_need_repair) {
-    Type_of_fuel need_repair;
     std::cout << "Input if car need repair:\n1 - yes\n2 - no: ";
     int choice{};
     std::cin >> choice;
@@ -153,7 +149,6 @@ enum Car_colors {
         Bianco_Courmayeur = 9,Blue_Ember = 10
 };
 void input_color(std::string &color) {
-    Car_colors car_clr;
     std::vector<std::string> car_colors {
         "Long_Beach_Blue","Arrow_Gray",
         "Purple_Sector","Mint_Green",

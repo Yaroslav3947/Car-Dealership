@@ -1,13 +1,13 @@
 #pragma once
 
-#include <I_Transport.hpp>
-#include <UtilChecking.hpp>
+#include "I_Transport.hpp"
+#include "UtilChecking.hpp"
 class Car : public I_Transport, public std::enable_shared_from_this<Car> {
-    bool is_need_repair;
+    std::string car_body_styles;
     int number_of_doors;
+    bool is_need_repair;
     std::string type_of_fuel;
     std::string configuration;
-    std::string car_body_styles;
     void write_info_to_file(const std::string &path) override;
     static constexpr const char *default_car_body_styles = "no style";
     static constexpr const int default_number_of_doors = 0;

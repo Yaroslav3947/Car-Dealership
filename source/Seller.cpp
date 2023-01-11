@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include <Seller.hpp>
+#include "Seller.hpp"
 
 Seller::Seller(int id, std::string name, int age, int wage, int number_of_sold_cars) 
     :I_Person{id, name, age}, wage{wage}, number_of_sold_cars{number_of_sold_cars} {

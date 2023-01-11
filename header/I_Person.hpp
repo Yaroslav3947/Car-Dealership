@@ -5,21 +5,21 @@
 #include <memory>
 #include <iostream>
 
-#include <I_Printable.hpp>
-#include <I_Transport.hpp>
-#include <UtilChecking.hpp>
-#include <IllegalAgeException.hpp>
-#include <IllegalWageException.hpp>
-#include <IllegalNumberOfRepairedOrSoldCarsException.hpp>
+#include "I_Printable.hpp"
+#include "I_Transport.hpp"
+#include "UtilChecking.hpp"
+#include "IllegalAgeException.hpp"
+#include "IllegalWageException.hpp"
+#include "IllegalNumberOfRepairedOrSoldCarsException.hpp"
 
 class I_Person : public I_Printable {
     static constexpr const int default_age = 18;
     static constexpr const int default_id = -1;
     static constexpr const char *default_name = "Unnamed Person";
 protected:
+    std::string name;
     int age;
     int id;
-    std::string name;
 public:
     I_Person(int id = default_id,
             std::string name = default_name,
