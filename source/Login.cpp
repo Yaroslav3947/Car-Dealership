@@ -47,7 +47,7 @@ bool IsPassOk(const std::string &password) {
 }
 std::vector <std::string> get_all_usernames() {
     std::vector<std::string> all_usernames;
-    std::string path_to_folder_with_pass_and_usernames = "D:\\PassAndUsernames.txt";
+    std::string path_to_folder_with_pass_and_usernames = "PassAndUsernames.txt";
     std::ifstream in_file;
     in_file.open(path_to_folder_with_pass_and_usernames);
     if (!in_file) {
@@ -62,8 +62,8 @@ std::vector <std::string> get_all_usernames() {
         }
         number_of_line++;
     }
-    return all_usernames;
     in_file.close();
+    return all_usernames;
 }
 std::string getUsername() {
     std::vector<std::string> all_usernames = get_all_usernames();
@@ -118,7 +118,7 @@ int getId() {
     return id;
 }
 void get_user_data(const std::string &username, const std::string &password, int &id, std::string &fileUsername, std::string &filePassword) {
-    const std::string path_to_folder_with_pass_and_usernames = "D:\\PassAndUsernames.txt";
+    const std::string path_to_folder_with_pass_and_usernames = "PassAndUsernames.txt";
     std::ifstream in_file;
     in_file.open(path_to_folder_with_pass_and_usernames);
     if(!in_file) {
@@ -189,7 +189,7 @@ void YouAreAlreadyInSystem() {
     std::cout << "You are already in system";
 }
 void put_info_into_file(const std::string &username, const std::string &password, const int &id) {
-    const std::string path = "D:\\PassAndUsernames.txt";
+    const std::string path = "PassAndUsernames.txt";
     std::cout << "================================================\nYou have successfully registered\n";
     std::ofstream out_file;
     out_file.open(path, std::ios::app);

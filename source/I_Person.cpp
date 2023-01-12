@@ -3,18 +3,8 @@
 
 #include "I_Person.hpp"
 
-
 I_Person::I_Person(int id, std::string name, int age) 
     : name{name}, age{age}, id{id} {
-}
-int I_Person::get_id() const {
-    return id;
-}
-int I_Person::get_age() const {
-    return age;
-}
-std::string I_Person::get_name() const {
-    return name;
 }
 void I_Person::printInfo(std::ostream &os) const {
     os << "[Person: " <<  name << ": " << age << "y.o]";

@@ -6,14 +6,11 @@ Client::Client(int id, std::string name, int age)
     : I_Person{id, name, age} {
         this->cars = get_cars();
 }
-int Client::get_number_of_cars() const {
-    return number_of_cars;
-}
 void Client::printInfo(std::ostream &os) const {
     os << "[Client: id: " <<  id << ": " << name << ": " << age << "y.o: "  << number_of_cars << " cars]";
 }
 void Client::add_car(I_Transport::PtrT car) {
-    const std::string path_to_clients_file = "D:\\" + std::to_string(this->get_id()) + ".txt";
+    const std::string path_to_clients_file = "Clients/" + std::to_string(this->get_id()) + ".txt";
     std::cout << path_to_clients_file << std::endl;
     car->write_info_to_file(path_to_clients_file);
     number_of_cars++;
@@ -22,7 +19,7 @@ void Client::set_id(const size_t &id) {
     I_Person::set_id(id);
 }
 std::list<I_Transport::PtrT> Client::get_cars() {
-    const std::string path_to_clients_file = "D:\\" + std::to_string(this->get_id()) + ".txt";
+    const std::string path_to_clients_file = "Clients/" + std::to_string(this->get_id()) + ".txt";
     bool is_new, is_need_repair;
     double fuel_consumption, price;
     int number_of_doors, year_of_manufacture;

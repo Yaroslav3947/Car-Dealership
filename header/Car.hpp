@@ -29,12 +29,12 @@ public:
         std::string type_of_fuel = default_type_of_fuel);
     ~Car() = default;
     void set_configuration();
-    bool get_is_need_repair() const;
-    int get_number_of_doors() const;
-    std::string get_type_of_fuel() const;
-    std::string get_configuration() const;
+    bool get_is_need_repair() const { return is_need_repair; };
+    int get_number_of_doors() const { return number_of_doors; };
+    std::string get_type_of_fuel() const { return type_of_fuel; };
+    std::string get_configuration() const { return configuration; };
     void set_id(const size_t &id) override;
-    std::string get_car_body_styles() const;
+    std::string get_car_body_styles() const { return car_body_styles; };
     void print_all_info_from_file() const override;
     void inputInfo(std::list<PtrT> &list) override;
     virtual void printInfo(std::ostream &os) const override;

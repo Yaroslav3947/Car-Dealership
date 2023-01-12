@@ -11,12 +11,6 @@ Worker::Worker(std::string name, int age, int wage)
             throw IllegalWageException();
         }
 }
-int Worker::get_number_of_repaired_cars() const {
-    return number_of_repaired_cars;
-}
-int Worker::get_wage() const {
-    return wage;
-}
 void Worker::set_id(const size_t &id) {
     I_Person::set_id(id);
 }
