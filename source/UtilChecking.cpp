@@ -70,12 +70,11 @@ std::vector<int> get_all_ids() {
         throw FileOpenIssue();
     }
     int id;
-    while(!in_file.eof()) {
-        in_file >> id;
+    while(in_file >> id) {
         ids.push_back(id);
     }
-    return ids;
     in_file.close();
+    return ids;
 }
 void write_to_id_file(const int &free_id) {
     const std::string path_to_ids = "Id.txt";
@@ -90,9 +89,9 @@ int generate_id(const std::vector<int> &ids) {
     if(ids.size() == 0) {
         return 0;
     }
-    const size_t max_value_of_id = 1000;
+    const int max_value_of_id = 1000;
     int free_id {0};
-    for(size_t i = 0;i<max_value_of_id;i++) {
+    for(int i = 0;i < max_value_of_id;i++) {
         if(i != ids[i]) {
             free_id = i;
             write_to_id_file(free_id);

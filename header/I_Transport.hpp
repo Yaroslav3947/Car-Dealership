@@ -20,10 +20,10 @@ protected:
     std::string country;
     std::string brand;
     std::string color;
+    int year_of_manufacture;
     double fuel_consumption;
     double price;
     bool is_new;
-    int year_of_manufacture;
     static constexpr const int default_id = -1;  
     static constexpr const double default_price = 0.0;
     static constexpr const bool default_is_new = true;

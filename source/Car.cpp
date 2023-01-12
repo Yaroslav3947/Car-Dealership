@@ -7,29 +7,11 @@
 
 #include "Car.hpp"
 
-
 Car::Car(int id, std::string brand, std::string model, std::string color, std::string country, int year_of_manufacture, double fuel_consumption, double price, bool is_new, std::string car_body_styles, int number_of_doors, bool is_need_repair, std::string type_of_fuel)
     : I_Transport{id, brand, model, color, country, year_of_manufacture, fuel_consumption, price, is_new}, car_body_styles{car_body_styles}, number_of_doors{number_of_doors}, is_need_repair{is_need_repair}, type_of_fuel{type_of_fuel} {
         set_number_of_doors(car_body_styles, number_of_doors);
         set_configuration();
 }
-
-
-// void Car::printInfo(std::ostream &os) const {
-//     const int field_size1 = 15;
-//     const int field_size3 = 25;
-//     os << "[Car: id: " << id  << ":" << brand << ": " << model << ":" << color << ":" << country << ":" << year_of_manufacture << " year: " << fuel_consumption << "lit/100km: $" << price << ":";
-//     if (is_new)
-//         os << "new: ";
-//     else
-//         os << "used: ";
-//     os << car_body_styles << ":" << number_of_doors << " doors: " << configuration << ":";
-//     if (is_need_repair)
-//         os << "need_repair:";
-//     else
-//         os << "doesn't_need_repair:";
-//     os << type_of_fuel << "]";
-// }
 void Car::printInfo(std::ostream &os) const {
         os << "["  << std::setw(5) << std::left << id
            << std::setw(12) << std::left << brand
@@ -248,19 +230,4 @@ void Car::set_is_need_repair(const bool &is_need_repair) {
 }
 void Car::set_id(const size_t &id) {
     I_Transport::set_id(id);
-}
-int Car::get_number_of_doors() const {
-    return number_of_doors;
-}
-bool Car::get_is_need_repair() const {
-    return is_need_repair;
-}
-std::string Car::get_type_of_fuel() const {
-    return type_of_fuel;
-}
-std::string Car::get_configuration() const {
-    return configuration;
-}
-std::string Car::get_car_body_styles() const {
-    return car_body_styles;
 }
