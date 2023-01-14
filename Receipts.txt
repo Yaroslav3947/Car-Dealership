@@ -1,0 +1,3 @@
+Id of receipt: 21
+Car: id:2 Toyota Land_Cruiser Japan Electric_Blue color $15000
+Client:18 Yaroslav3947

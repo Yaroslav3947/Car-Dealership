@@ -119,5 +119,16 @@ void print_headline() {
            << std::setw(15) << std::left << "REPAIR"
            << std::setw(7) << std::left << "FUEL" << std::endl;
 }
-
+void print_half_line(const int &size_of_line, const std::string &line) {
+    for (size_t i{0}; i < (size_of_line / 2) - (line.size() / 2); i++) {
+        std::cout << "=";
+    }
+}
+void print_headline_for_greetings(const std::string &line) {
+    const int size_of_line = 156;
+    print_half_line(size_of_line, line);
+    std::cout << line;
+    print_half_line(size_of_line, line);
+    std::cout << std::endl;
+}
 

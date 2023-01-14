@@ -16,7 +16,7 @@ public:
            int wage = default_wage);
     int get_wage() const { return wage; };
     virtual ~Worker() = default;
-    void set_id(const size_t &id) override;
+    void set_id(const size_t &id);
     void repair_car(I_Transport::PtrT car);
     int get_number_of_repaired_cars() const { return number_of_repaired_cars; };
     void printInfo(std::ostream &os) const override;

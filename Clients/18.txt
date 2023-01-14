@@ -1,0 +1,2 @@
+1              AUDI           S8             Arrow_Gray               Germany             2019           15.6           67000          1              Sedan          5              vip            0              Diesel         
+2              Toyota         Land_Cruiser   Electric_Blue            Japan               1995           25.6           15000          1              Jeep           5              standart       1              Diesel         

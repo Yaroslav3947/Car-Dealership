@@ -14,7 +14,7 @@ public:
     Client(int id,
            std::string name = default_name,
            int age = default_age);
-    void set_id(const size_t &id) override;
+    void set_id(const size_t &id);
     int get_number_of_cars() const { return number_of_cars; };
     ~Client() = default;
     std::list<I_Transport::PtrT> get_cars();
