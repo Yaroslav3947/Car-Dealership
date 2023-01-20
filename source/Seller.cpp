@@ -44,6 +44,7 @@ void write_receipt_to_file(I_Transport::PtrT car, std::shared_ptr<Client> client
     << "\nCar: id:" << car->get_id() << " " <<  car->get_brand() << " " << car->get_model() 
     << " "  << car->get_country() << " " << car->get_color() << " color $" << car->get_price() << "\n"
     << "Client: id:" << client->get_id() << " " << client->get_name() << "\n";
+    out_file.close();
 }
 void Seller::sell_car(I_Transport::PtrT car, std::shared_ptr<Client> client) {
     print_headline_for_greetings("RECEIPT");

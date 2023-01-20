@@ -58,7 +58,6 @@ public:
     virtual void set_id(const size_t &id) = 0;
     virtual bool get_is_need_repair() const = 0;
     void printInfo(std::ostream &os) const override = 0;
-    virtual void print_all_info_from_file() const = 0;
     virtual void inputInfo(std::list <PtrT> &list) = 0;
     virtual void set_is_need_repair(const bool &is_need_repair) = 0;
 };

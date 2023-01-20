@@ -53,18 +53,6 @@ void Car::write_info_to_file(const std::string &path) {
              << std::setw(field_size1) << std::left << this->type_of_fuel << std::endl;
     out_file.close();
 }
-void Car::print_all_info_from_file() const {
-    std::ifstream in_file{path_to_car_file};
-    if(!in_file) {
-        throw FileOpenIssue();
-    }
-    std::string line{};
-    while (!in_file.eof()) {
-        std::getline(in_file, line);
-        std::cout << line << std::endl;
-    }
-    in_file.close();
-}
 void print_preferences_of(const std::vector <std::string> &vec) {
     for(size_t i{0};i<vec.size();i++) {
         std::cout << i + 1 << " - " << vec[i] << std::endl;

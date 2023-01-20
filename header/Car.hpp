@@ -35,7 +35,6 @@ public:
     std::string get_configuration() const { return configuration; };
     void set_id(const size_t &id) override;
     std::string get_car_body_styles() const { return car_body_styles; };
-    void print_all_info_from_file() const override;
     void inputInfo(std::list<PtrT> &list) override;
     virtual void printInfo(std::ostream &os) const override;
     void set_is_need_repair(const bool &is_need_repair) override;
