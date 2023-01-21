@@ -185,13 +185,13 @@ void display_message_of_no_cars() {
     std::cout << "You do not have any car to repair, go to the salon and buy one" << std::endl;
     print_headline_for_greetings();
 }
-void repair_car_by_id(const std::list<I_Transport::PtrT> &cars, std::shared_ptr<Worker> worker) {
+void repair_car_by_id(const std::list<I_Transport::PtrT> &cars, std::shared_ptr<Worker> worker, std::shared_ptr<Client> client) {
     int id = get_id_of_car_to_repair();
     bool is_repaired = false;
     for(const auto car: cars) {
         if(id == car->get_id()) {
             is_repaired = true;
-            worker->repair_car(car);
+            worker->repair_car(car,client);
         }
     }
     if(is_repaired == false) {
@@ -211,11 +211,12 @@ void repair_clients_car(std::shared_ptr<Client> client) {
         return;
     }
 
-    std::shared_ptr<Worker> worker = std::make_shared<Worker>("Steve", 24);
+    std::vector <int> all_ids = get_all_ids();
+    int id = generate_id(all_ids);
+    std::shared_ptr<Worker> worker = std::make_shared<Worker>(id, "Steve", 24);
     std::list<I_Transport::PtrT> cars = client->get_cars();
-
     display_info_about_client(client);
-    repair_car_by_id(cars, worker);
+    repair_car_by_id(cars, worker,client);
     display_info_about_worker(worker);
     return;
 }
