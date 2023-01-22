@@ -14,8 +14,11 @@ To run the Car Database program, you will need to have the following software in
 ## Once you have the above software installed, you can proceed with the following steps to install the Car Database program: ##
 
 Download the program's source code from the provided link.
+
 1.Open a terminal window and navigate to the folder where the source code is located.
+
 2.Run the command "make" to build the program.
+
 3.Once the build is complete, you can run the program by executing the "./Car" command.
 
 ## Instructions for using the program: ##
