@@ -206,7 +206,8 @@ void display_info_about_worker(std::shared_ptr<Worker> worker) {
 }
 void repair_clients_car(std::shared_ptr<Client> client) {
     const int zero_cars = 0;
-    if(client->get_number_of_cars() == zero_cars) { 
+    std::list<I_Transport::PtrT> clients_cars = client->get_cars();
+    if(clients_cars.size() == zero_cars) { 
         display_message_of_no_cars();
         return;
     }
@@ -214,9 +215,8 @@ void repair_clients_car(std::shared_ptr<Client> client) {
     std::vector <int> all_ids = get_all_ids();
     int id = generate_id(all_ids);
     std::shared_ptr<Worker> worker = std::make_shared<Worker>(id, "Steve", 24);
-    std::list<I_Transport::PtrT> cars = client->get_cars();
     display_info_about_client(client);
-    repair_car_by_id(cars, worker,client);
+    repair_car_by_id(clients_cars, worker,client);
     display_info_about_worker(worker);
     return;
 }
