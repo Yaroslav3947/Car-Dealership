@@ -131,4 +131,22 @@ void print_headline_for_greetings(const std::string &line) {
     print_half_line(size_of_line, line);
     std::cout << std::endl;
 }
+std::string hash_passwordSHA256(const std::string& password) {
+    // Create a SHA-256 context
+    SHA256_CTX sha256;
+    // Initialize the context
+    SHA256_Init(&sha256);
+    // Hash the password
+    SHA256_Update(&sha256, password.c_str(), password.size());
+    // Store the hashed password in hash variable
+    unsigned char hash[SHA256_DIGEST_LENGTH];
+    SHA256_Final(hash, &sha256);
+
+    std::string hashed_password;
+    for (int i = 0; i < SHA256_DIGEST_LENGTH; i++) {
+        hashed_password += hash[i];
+    }
+
+    return hashed_password;
+}
 

@@ -7,8 +7,8 @@ class Login {
     std::string username;
     std::string password;
     void isLoggedIn();
-    void logInSystem();
-    void singUpSystem();
+    void logInToSystem();
+    void registerNewUser();
 public:
     std::string get_username() const {return username;};
     int get_id() const {return id;};

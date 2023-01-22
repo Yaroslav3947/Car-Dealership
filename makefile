@@ -14,13 +14,13 @@ FLAGS = -Wall -Werror -Wextra
 all: $(NAME)
 
 $(NAME): $(OBJDIR) $(OBJ) ./header/*.hpp
-	g++ $(CXXFLAGS) $(OBJ) -o $(NAME) -lboost_system
+	g++ $(CXXFLAGS) $(OBJ) -o $(NAME) -lboost_system -lssl -lcrypto 
 
 $(OBJDIR):
 	mkdir $(OBJDIR)
 
 $(OBJ) : $(OBJDIR)%.o : $(SRCDIR)%.cpp ./header/*.hpp
-	g++ -std=c++17 $(FLAGS) -o $@ -c $< -I ./header -lboost_system
+	g++ -std=c++17 $(FLAGS) -o $@ -c $< -I ./header -lboost_system -lssl -lcrypto 
 
 clean:
 	rm -rf $(OBJDIR)
