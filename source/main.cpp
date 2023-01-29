@@ -1,13 +1,3 @@
-#include <map>
-#include <list>
-#include <ctime>
-#include <memory>
-#include <vector>
-#include <fstream>
-#include <iostream>
-#include <algorithm>
-#include <functional>
-
 #include "Car.hpp"
 #include "Login.hpp"
 #include "Client.hpp"
@@ -17,7 +7,9 @@
 #include "I_Transport.hpp"
 #include "UtilChecking.hpp"
 
-
+void show_posibilities(std::shared_ptr<I_Person> client) {
+    std::cout << client->get_name() << ", choose one variant below:\n1 - buy new car from salon\n2 - buy custom car\n3 - show my cars\n4 - repair car\n5 - quit program\n";
+}
 void sorting_cars(std::list<I_Transport::PtrT> cars) {
     enum class Sorting_cars {
         BY_BRAND = '1',
