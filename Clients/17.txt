@@ -1,0 +1,2 @@
+5              Mercedes       S63            Amplify_Orange           Germany             2019           29.9           78400.4        1              Coupe          3              vip            0              Diesel         
+10             Volkswagen     b7             Thundernight_Metallic    Germany             2014           11             15000          1              Sedan          5              standart       0              Gas            
