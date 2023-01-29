@@ -149,4 +149,38 @@ std::string hash_passwordSHA256(const std::string& password) {
 
     return hashed_password;
 }
-
+void print_half_line() {
+    std::cout << "===================================\n";
+}
+void ask_for_sorting() {
+    print_half_line();
+    std::cout << "Do you want to sort cars?\n1 - show way of sorting\n2 - continue buying without sorting\n";
+    print_half_line();
+    return;
+}
+char getChoice() {
+    char choice;
+    std::cout << "Input choice:";
+    std::cin >> choice;
+    return choice;
+} 
+void show_way_of_sorting() {
+    print_half_line();
+    std::cout << "Which way do you want to sort cars?\n1 - by brand\n2 - by color\n3 - by country\n4 - by model\n5 - by price\n6 - by fuel consumption\n7 - continue buying\n";
+    print_half_line();
+}
+size_t get_id_of_wanted_car() {
+    size_t wanted_car_id;
+    std::cout << "Input id of wanted car:";
+    std::cin >> wanted_car_id;
+    return wanted_car_id;
+}
+void show_posibilities(std::shared_ptr<I_Person> client) {
+    std::cout << client->get_name() << ", choose one variant below:\n1 - buy new car from salon\n2 - buy custom car\n3 - show my cars\n4 - repair car\n5 - quit program\n";
+}
+size_t get_id_of_car_to_repair() {
+    size_t id;
+    std::cout << "Choose car you want to repair by id\nEnter id:";
+    std::cin >> id;
+    return id;
+}

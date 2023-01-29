@@ -24,6 +24,12 @@ int generate_id(const std::vector<int> &ids);
 std::list<I_Transport::PtrT> get_list_of_cars();
 void display(std::list <I_Transport::PtrT> list);
 void print_half_line(const int &size_of_line, const std::string &line);
-void print_headline_for_greetings(const std::string &line = " ");
+void print_headline_for_greetings(const std::string &line = "");
 std::string hash_passwordSHA256(const std::string& password);
-
+void print_half_line(); 
+void ask_for_sorting();
+char getChoice(); 
+void show_way_of_sorting();
+size_t get_id_of_wanted_car();
+void show_posibilities(std::shared_ptr<I_Person> client);
+size_t get_id_of_car_to_repair();

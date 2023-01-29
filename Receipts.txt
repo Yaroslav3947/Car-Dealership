@@ -1,3 +1,9 @@
 Id of receipt: 15
 Car: id:2 Toyota Land_Cruiser Japan Electric_Blue color $15000
 Client: id:13 Yaroslav
+Id of receipt: 19
+Car: id:5 Mercedes S63 Germany Amplify_Orange color $78400.4
+Client: id:17 Yaroslav3947
+Id of receipt: 30
+Car: id:10 Volkswagen b7 Germany Thundernight_Metallic color $15000
+Client: id:17 Yaroslav3947
