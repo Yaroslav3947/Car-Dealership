@@ -175,9 +175,6 @@ size_t get_id_of_wanted_car() {
     std::cin >> wanted_car_id;
     return wanted_car_id;
 }
-void show_posibilities(std::shared_ptr<I_Person> client) {
-    std::cout << client->get_name() << ", choose one variant below:\n1 - buy new car from salon\n2 - buy custom car\n3 - show my cars\n4 - repair car\n5 - quit program\n";
-}
 size_t get_id_of_car_to_repair() {
     size_t id;
     std::cout << "Choose car you want to repair by id\nEnter id:";

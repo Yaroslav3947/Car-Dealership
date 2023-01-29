@@ -1,11 +1,16 @@
 #pragma once
 
+#include <map>
 #include <list>
+#include <ctime>
 #include <vector>
 #include <string>
 #include <memory>
 #include <fstream>
 #include <iomanip>
+#include <iostream>
+#include <algorithm>
+#include <functional>
 #include <openssl/sha.h>
 
 #include "Car.hpp"
@@ -31,5 +36,4 @@ void ask_for_sorting();
 char getChoice(); 
 void show_way_of_sorting();
 size_t get_id_of_wanted_car();
-void show_posibilities(std::shared_ptr<I_Person> client);
 size_t get_id_of_car_to_repair();
